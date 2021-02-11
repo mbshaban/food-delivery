@@ -21,7 +21,7 @@ class CreateDistrictsTable extends Migration
             $table->timestamps();
         });
         Schema::table('districts', function(Blueprint $table){
-			$table->foreignId('province_id')->constrained('provinces')->onUpdate('cascade')->onDelete('cascade');
+			$table->foreignId('provinces_id')->constrained('provinces')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
