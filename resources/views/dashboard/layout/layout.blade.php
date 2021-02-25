@@ -15,7 +15,7 @@
         </div>
         @include('dashboard/include/sidebar')
         <div class="content-body"><!-- Analytics charts -->
-
+        @yield('content')
         </div>
     </div>
 </div>

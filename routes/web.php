@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('dashboard', function () {
     return view('dashboard.index');
 });
+
+Route::get('sellers', function (){
+	return view('dashboard.seller');
+});
