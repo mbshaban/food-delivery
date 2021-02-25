@@ -1,322 +1,230 @@
-<!--begin::Header-->
-<div id="kt_header" class="header header-fixed">
-    <!--begin::Container-->
-    <div class="container d-flex align-items-stretch justify-content-between">
-        <!--begin::Left-->
-        <div class="d-none d-lg-flex align-items-center mr-3">
-            <!--begin::Aside Toggle-->
-            <button class="btn btn-icon aside-toggle ml-n3 mr-10" id="kt_aside_desktop_toggle">
-									<span class="svg-icon svg-icon-xxl svg-icon-dark-75">
-										<!--begin::Svg Icon | path:/metronic/theme/html/demo5/dist/assets/media/svg/icons/Text/Align-left.svg-->
-										<svg xmlns="http://www.w3.org/2000/svg"
-                                             xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                             viewBox="0 0 24 24" version="1.1">
-											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-												<rect x="0" y="0" width="24" height="24"/>
-												<rect fill="#000000" opacity="0.3" x="4" y="5" width="16" height="2"
-                                                      rx="1"/>
-												<rect fill="#000000" opacity="0.3" x="4" y="13" width="16" height="2"
-                                                      rx="1"/>
-												<path
-                                                    d="M5,9 L13,9 C13.5522847,9 14,9.44771525 14,10 C14,10.5522847 13.5522847,11 13,11 L5,11 C4.44771525,11 4,10.5522847 4,10 C4,9.44771525 4.44771525,9 5,9 Z M5,17 L13,17 C13.5522847,17 14,17.4477153 14,18 C14,18.5522847 13.5522847,19 13,19 L5,19 C4.44771525,19 4,18.5522847 4,18 C4,17.4477153 4.44771525,17 5,17 Z"
-                                                    fill="#000000"/>
-											</g>
-										</svg>
-                                        <!--end::Svg Icon-->
-									</span>
-            </button>
-            <!--end::Aside Toggle-->
-            <!--begin::Logo-->
-            <a href="index.html">
-                <img alt="Logo" src="{{asset('media/logos/logo-letter-1.png')}}"
-                     class="logo-sticky max-h-35px"/>
-            </a>
-            <!--end::Logo-->
-            <!--begin::Desktop Search-->
-            <div class="quick-search quick-search-inline ml-20 w-300px" id="kt_quick_search_inline">
-                <!--begin::Form-->
-                <form method="get" class="quick-search-form">
-                    <div class="input-group rounded bg-light">
-                        <div class="input-group-prepend">
-												<span class="input-group-text">
-													<span class="svg-icon svg-icon-lg">
-														<!--begin::Svg Icon | path:/metronic/theme/html/demo5/dist/assets/media/svg/icons/General/Search.svg-->
-														<svg xmlns="http://www.w3.org/2000/svg"
-                                                             xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                                             height="24px" viewBox="0 0 24 24" version="1.1">
-															<g stroke="none" stroke-width="1" fill="none"
-                                                               fill-rule="evenodd">
-																<rect x="0" y="0" width="24" height="24"/>
-																<path
-                                                                    d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z"
-                                                                    fill="#000000" fill-rule="nonzero" opacity="0.3"/>
-																<path
-                                                                    d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z"
-                                                                    fill="#000000" fill-rule="nonzero"/>
-															</g>
-														</svg>
-                                                        <!--end::Svg Icon-->
-													</span>
-												</span>
-                        </div>
-                        <input type="text" class="form-control h-45px" placeholder="Search..."/>
-                        <div class="input-group-append">
-												<span class="input-group-text">
-													<i class="quick-search-close ki ki-close icon-sm text-muted"></i>
-												</span>
-                        </div>
-                    </div>
-                </form>
-                <!--end::Form-->
-                <!--begin::Search Toggle-->
-                <div id="kt_quick_search_toggle" data-toggle="dropdown" data-offset="0px,1px"></div>
-                <!--end::Search Toggle-->
-                <!--begin::Dropdown-->
-                <div class="dropdown-menu dropdown-menu-left dropdown-menu-lg dropdown-menu-anim-up">
-                    <div class="quick-search-wrapper scroll" data-scroll="true" data-height="350"
-                         data-mobile-height="200"></div>
-                </div>
-                <!--end::Dropdown-->
-            </div>
-            <!--end::Desktop Search-->
+<!-- fixed-top-->
+<nav class="header-navbar navbar-expand-md navbar navbar-with-menu fixed-top navbar-light navbar-hide-on-scroll navbar-border navbar-shadow navbar-brand-center">
+    <div class="navbar-wrapper">
+        <div class="navbar-header">
+            <ul class="nav navbar-nav flex-row">
+                <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
+                <li class="nav-item"><a class="navbar-brand" href="index-2.html"><img class="brand-logo" alt="robust admin logo" src="../../../app-assets/images/logo/logo-dark-sm.png">
+                        <h3 class="brand-text">Robust Admin</h3></a></li>
+                <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i class="fa fa-ellipsis-v"></i></a></li>
+            </ul>
         </div>
-        <!--end::Left-->
-        <!--begin::Topbar-->
-        <div class="topbar">
-            <!--begin::Tablet & Mobile Search-->
-            <div class="dropdown d-flex d-lg-none">
-                <!--begin::Toggle-->
-                <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
-                    <div class="btn btn-icon btn-clean btn-lg btn-dropdown mr-1">
-											<span class="svg-icon svg-icon-xl">
-												<!--begin::Svg Icon | path:/metronic/theme/html/demo5/dist/assets/media/svg/icons/General/Search.svg-->
-												<svg xmlns="http://www.w3.org/2000/svg"
-                                                     xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                                     height="24px" viewBox="0 0 24 24" version="1.1">
-													<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-														<rect x="0" y="0" width="24" height="24"/>
-														<path
-                                                            d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z"
-                                                            fill="#000000" fill-rule="nonzero" opacity="0.3"/>
-														<path
-                                                            d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z"
-                                                            fill="#000000" fill-rule="nonzero"/>
-													</g>
-												</svg>
-                                                <!--end::Svg Icon-->
-											</span>
-                    </div>
-                </div>
-                <!--end::Toggle-->
-                <!--begin::Dropdown-->
-                <div
-                    class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg">
-                    <div class="quick-search quick-search-dropdown" id="kt_quick_search_dropdown">
-                        <!--begin:Form-->
-                        <form method="get" class="quick-search-form">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-														<span class="input-group-text">
-															<span class="svg-icon svg-icon-lg">
-																<!--begin::Svg Icon | path:/metronic/theme/html/demo5/dist/assets/media/svg/icons/General/Search.svg-->
-																<svg xmlns="http://www.w3.org/2000/svg"
-                                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                     width="24px" height="24px" viewBox="0 0 24 24"
-                                                                     version="1.1">
-																	<g stroke="none" stroke-width="1" fill="none"
-                                                                       fill-rule="evenodd">
-																		<rect x="0" y="0" width="24" height="24"/>
-																		<path
-                                                                            d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z"
-                                                                            fill="#000000" fill-rule="nonzero"
-                                                                            opacity="0.3"/>
-																		<path
-                                                                            d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z"
-                                                                            fill="#000000" fill-rule="nonzero"/>
-																	</g>
-																</svg>
-                                                                <!--end::Svg Icon-->
-															</span>
-														</span>
+        <div class="navbar-container content">
+            <div class="collapse navbar-collapse" id="navbar-mobile">
+                <ul class="nav navbar-nav mr-auto float-left">
+                    <li class="nav-item d-none d-md-block"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu">         </i></a></li>
+                    <li class="dropdown nav-item mega-dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Mega</a>
+                        <ul class="mega-dropdown-menu dropdown-menu row">
+                            <li class="col-md-2">
+                                <h6 class="dropdown-menu-header text-uppercase mb-1"><i class="fa fa-newspaper-o"></i> News</h6>
+                                <div id="mega-menu-carousel-example">
+                                    <div><img class="rounded img-fluid mb-1" src="../../../app-assets/images/slider/slider-2.png" alt="First slide"><a class="news-title mb-0" href="#">Poster Frame PSD</a>
+                                        <p class="news-content"><span class="font-small-2">January 26, 2018</span></p>
+                                    </div>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Search..."/>
-                                <div class="input-group-append">
-														<span class="input-group-text">
-															<i class="quick-search-close ki ki-close icon-sm text-muted"></i>
-														</span>
+                            </li>
+                            <li class="col-md-3">
+                                <h6 class="dropdown-menu-header text-uppercase"><i class="fa fa-random"></i> Drill down menu</h6>
+                                <ul class="drilldown-menu">
+                                    <li class="menu-list">
+                                        <ul>
+                                            <li><a class="dropdown-item" href="layout-2-columns.html"><i class="ft-file"></i> Page layouts & Templates</a></li>
+                                            <li><a href="#"><i class="ft-align-left"></i> Multi level menu</a>
+                                                <ul>
+                                                    <li><a class="dropdown-item" href="#"><i class="fa fa-file-o"></i>  Second level</a></li>
+                                                    <li><a href="#"><i class="fa fa-star-o"></i> Second level menu</a>
+                                                        <ul>
+                                                            <li><a class="dropdown-item" href="#"><i class="fa fa-heart"></i>  Third level</a></li>
+                                                            <li><a class="dropdown-item" href="#"><i class="fa fa-heart"></i> Third level</a></li>
+                                                            <li><a class="dropdown-item" href="#"><i class="fa fa-heart"></i> Third level</a></li>
+                                                            <li><a class="dropdown-item" href="#"><i class="fa fa-heart"></i> Third level</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a class="dropdown-item" href="#"><i class="fa fa-film"></i> Second level, third link</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Second level, fourth link</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a class="dropdown-item" href="color-palette-primary.html"><i class="ft-camera"></i> Color palette system</a></li>
+                                            <li><a class="dropdown-item" href="https://pixinvent.com/bootstrap-admin-template/robust/starter-kit/ltr/vertical-menu-template/layout-2-columns.html"><i class="ft-edit"></i> Page starter kit</a></li>
+                                            <li><a class="dropdown-item" href="changelog.html"><i class="ft-minimize-2"></i> Change log</a></li>
+                                            <li><a class="dropdown-item" href="https://pixinvent.ticksy.com/"><i class="fa fa-life-ring"></i> Customer support center</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="col-md-3">
+                                <h6 class="dropdown-menu-header text-uppercase"><i class="fa fa-list"></i> Accordion</h6>
+                                <div id="accordionWrap" role="tablist" aria-multiselectable="true">
+                                    <div class="card border-0 box-shadow-0 collapse-icon accordion-icon-rotate">
+                                        <div class="card-header p-0 pb-2 border-0" id="headingOne" role="tab"><a data-toggle="collapse" data-parent="#accordionWrap" href="#accordionOne" aria-expanded="true" aria-controls="accordionOne">Accordion Item #1</a></div>
+                                        <div class="card-collapse collapse show" id="accordionOne" role="tabpanel" aria-labelledby="headingOne" aria-expanded="true">
+                                            <div class="card-content">
+                                                <p class="accordion-text text-small-3">Caramels dessert chocolate cake pastry jujubes bonbon. Jelly wafer jelly beans. Caramels chocolate cake liquorice cake wafer jelly beans croissant apple pie.</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-header p-0 pb-2 border-0" id="headingTwo" role="tab"><a class="collapsed" data-toggle="collapse" data-parent="#accordionWrap" href="#accordionTwo" aria-expanded="false" aria-controls="accordionTwo">Accordion Item #2</a></div>
+                                        <div class="card-collapse collapse" id="accordionTwo" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false">
+                                            <div class="card-content">
+                                                <p class="accordion-text">Sugar plum bear claw oat cake chocolate jelly tiramisu dessert pie. Tiramisu macaroon muffin jelly marshmallow cake. Pastry oat cake chupa chups.</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-header p-0 pb-2 border-0" id="headingThree" role="tab"><a class="collapsed" data-toggle="collapse" data-parent="#accordionWrap" href="#accordionThree" aria-expanded="false" aria-controls="accordionThree">Accordion Item #3</a></div>
+                                        <div class="card-collapse collapse" id="accordionThree" role="tabpanel" aria-labelledby="headingThree" aria-expanded="false">
+                                            <div class="card-content">
+                                                <p class="accordion-text">Candy cupcake sugar plum oat cake wafer marzipan jujubes lollipop macaroon. Cake dragée jujubes donut chocolate bar chocolate cake cupcake chocolate topping.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                        <!--end::Form-->
-                        <!--begin::Scroll-->
-                        <div class="quick-search-wrapper scroll" data-scroll="true" data-height="325"
-                             data-mobile-height="200"></div>
-                        <!--end::Scroll-->
-                    </div>
-                </div>
-                <!--end::Dropdown-->
+                            </li>
+                            <li class="col-md-4">
+                                <h6 class="dropdown-menu-header text-uppercase mb-1"><i class="fa fa-envelope"></i> Contact Us</h6>
+                                <form class="form form-horizontal">
+                                    <div class="form-body">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 form-control-label" for="inputName1">Name</label>
+                                            <div class="col-sm-9">
+                                                <div class="position-relative has-icon-left">
+                                                    <input class="form-control" type="text" id="inputName1" placeholder="John Doe">
+                                                    <div class="form-control-position pl-1"><i class="fa fa-user"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 form-control-label" for="inputEmail1">Email</label>
+                                            <div class="col-sm-9">
+                                                <div class="position-relative has-icon-left">
+                                                    <input class="form-control" type="email" id="inputEmail1" placeholder="john@example.com">
+                                                    <div class="form-control-position pl-1"><i class="fa fa-envelope"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 form-control-label" for="inputMessage1">Message</label>
+                                            <div class="col-sm-9">
+                                                <div class="position-relative has-icon-left">
+                                                    <textarea class="form-control" id="inputMessage1" rows="2" placeholder="Simple Textarea"></textarea>
+                                                    <div class="form-control-position pl-1"><i class="fa fa-comments"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 mb-1">
+                                                <button class="btn btn-info float-right" type="button"><i class="fa fa-paper-plane"></i> Send          </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#"><i class="ficon ft-maximize"></i></a></li>
+                    <li class="nav-item nav-search"><a class="nav-link nav-link-search" href="#"><i class="ficon ft-search"></i></a>
+                        <div class="search-input">
+                            <input class="input" type="text" placeholder="Explore Robust...">
+                        </div>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav float-right">
+                    <li class="dropdown dropdown-language nav-item"><a class="dropdown-toggle nav-link" id="dropdown-flag" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flag-icon flag-icon-gb"></i><span>English</span><span class="selected-language"></span></a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown-flag"><a class="dropdown-item" href="#"><i class="flag-icon flag-icon-gb"></i> English</a><a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a><a class="dropdown-item" href="#"><i class="flag-icon flag-icon-cn"></i> Chinese</a><a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i> German</a></div>
+                    </li>
+                    <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i><span class="badge badge-pill badge-default badge-danger badge-default badge-up">5</span></a>
+                        <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+                            <li class="dropdown-menu-header">
+                                <h6 class="dropdown-header m-0"><span class="grey darken-2">Notifications</span></h6><span class="notification-tag badge badge-default badge-danger float-right m-0">5 New</span>
+                            </li>
+                            <li class="scrollable-container media-list w-100"><a href="javascript:void(0)">
+                                    <div class="media">
+                                        <div class="media-left align-self-center"><i class="ft-plus-square icon-bg-circle bg-cyan"></i></div>
+                                        <div class="media-body">
+                                            <h6 class="media-heading">You have new order!</h6>
+                                            <p class="notification-text font-small-3 text-muted">Lorem ipsum dolor sit amet, consectetuer elit.</p><small>
+                                                <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">30 minutes ago</time></small>
+                                        </div>
+                                    </div></a><a href="javascript:void(0)">
+                                    <div class="media">
+                                        <div class="media-left align-self-center"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1"></i></div>
+                                        <div class="media-body">
+                                            <h6 class="media-heading red darken-1">99% Server load</h6>
+                                            <p class="notification-text font-small-3 text-muted">Aliquam tincidunt mauris eu risus.</p><small>
+                                                <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Five hour ago</time></small>
+                                        </div>
+                                    </div></a><a href="javascript:void(0)">
+                                    <div class="media">
+                                        <div class="media-left align-self-center"><i class="ft-alert-triangle icon-bg-circle bg-yellow bg-darken-3"></i></div>
+                                        <div class="media-body">
+                                            <h6 class="media-heading yellow darken-3">Warning notifixation</h6>
+                                            <p class="notification-text font-small-3 text-muted">Vestibulum auctor dapibus neque.</p><small>
+                                                <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Today</time></small>
+                                        </div>
+                                    </div></a><a href="javascript:void(0)">
+                                    <div class="media">
+                                        <div class="media-left align-self-center"><i class="ft-check-circle icon-bg-circle bg-cyan"></i></div>
+                                        <div class="media-body">
+                                            <h6 class="media-heading">Complete the task</h6><small>
+                                                <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Last week</time></small>
+                                        </div>
+                                    </div></a><a href="javascript:void(0)">
+                                    <div class="media">
+                                        <div class="media-left align-self-center"><i class="ft-file icon-bg-circle bg-teal"></i></div>
+                                        <div class="media-body">
+                                            <h6 class="media-heading">Generate monthly report</h6><small>
+                                                <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Last month</time></small>
+                                        </div>
+                                    </div></a></li>
+                            <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center" href="javascript:void(0)">Read all notifications</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-mail"></i><span class="badge badge-pill badge-default badge-info badge-default badge-up">5              </span></a>
+                        <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+                            <li class="dropdown-menu-header">
+                                <h6 class="dropdown-header m-0"><span class="grey darken-2">Messages</span></h6><span class="notification-tag badge badge-default badge-warning float-right m-0">4 New</span>
+                            </li>
+                            <li class="scrollable-container media-list w-100"><a href="javascript:void(0)">
+                                    <div class="media">
+                                        <div class="media-left"><span class="avatar avatar-sm avatar-online rounded-circle"><img src="../../../app-assets/images/portrait/small/avatar-s-19.png" alt="avatar"><i></i></span></div>
+                                        <div class="media-body">
+                                            <h6 class="media-heading">Margaret Govan</h6>
+                                            <p class="notification-text font-small-3 text-muted">I like your portfolio, let's start.</p><small>
+                                                <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Today</time></small>
+                                        </div>
+                                    </div></a><a href="javascript:void(0)">
+                                    <div class="media">
+                                        <div class="media-left"><span class="avatar avatar-sm avatar-busy rounded-circle"><img src="../../../app-assets/images/portrait/small/avatar-s-2.png" alt="avatar"><i></i></span></div>
+                                        <div class="media-body">
+                                            <h6 class="media-heading">Bret Lezama</h6>
+                                            <p class="notification-text font-small-3 text-muted">I have seen your work, there is</p><small>
+                                                <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Tuesday</time></small>
+                                        </div>
+                                    </div></a><a href="javascript:void(0)">
+                                    <div class="media">
+                                        <div class="media-left"><span class="avatar avatar-sm avatar-online rounded-circle"><img src="../../../app-assets/images/portrait/small/avatar-s-3.png" alt="avatar"><i></i></span></div>
+                                        <div class="media-body">
+                                            <h6 class="media-heading">Carie Berra</h6>
+                                            <p class="notification-text font-small-3 text-muted">Can we have call in this week ?</p><small>
+                                                <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Friday</time></small>
+                                        </div>
+                                    </div></a><a href="javascript:void(0)">
+                                    <div class="media">
+                                        <div class="media-left"><span class="avatar avatar-sm avatar-away rounded-circle"><img src="../../../app-assets/images/portrait/small/avatar-s-6.png" alt="avatar"><i></i></span></div>
+                                        <div class="media-body">
+                                            <h6 class="media-heading">Eric Alsobrook</h6>
+                                            <p class="notification-text font-small-3 text-muted">We have project party this saturday.</p><small>
+                                                <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">last month</time></small>
+                                        </div>
+                                    </div></a></li>
+                            <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center" href="javascript:void(0)">Read all messages</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown"><span class="avatar avatar-online"><img src="../../../app-assets/images/portrait/small/avatar-s-1.png" alt="avatar"><i></i></span><span class="user-name">John Doe</span></a>
+                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="user-profile.html"><i class="ft-user"></i> Edit Profile</a><a class="dropdown-item" href="email-application.html"><i class="ft-mail"></i> My Inbox</a><a class="dropdown-item" href="user-cards.html"><i class="ft-check-square"></i> Task</a><a class="dropdown-item" href="chat-application.html"><i class="ft-message-square"></i> Chats</a>
+                            <div class="dropdown-divider"></div><a class="dropdown-item" href="login-with-bg-image.html"><i class="ft-power"></i> Logout</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
-            <!--end::Tablet & Mobile Search-->
-            <!--begin::Create-->
-            <div class="dropdown">
-                <!--begin::Toggle-->
-                <div class="topbar-item mr-4" data-toggle="dropdown" data-offset="10px,0px">
-                    <div class="btn font-weight-bolder btn-sm btn-light-success px-5">Create</div>
-                </div>
-                <!--end::Toggle-->
-                <!--begin::Dropdown-->
-                <div
-                    class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-md">
-                    <!--begin::Navigation-->
-                    <ul class="navi navi-hover py-5">
-                        <li class="navi-item">
-                            <a href="#" class="navi-link">
-													<span class="navi-icon">
-														<i class="flaticon2-drop"></i>
-													</span>
-                                <span class="navi-text">New Group</span>
-                            </a>
-                        </li>
-                        <li class="navi-item">
-                            <a href="#" class="navi-link">
-													<span class="navi-icon">
-														<i class="flaticon2-list-3"></i>
-													</span>
-                                <span class="navi-text">Contacts</span>
-                            </a>
-                        </li>
-                        <li class="navi-item">
-                            <a href="#" class="navi-link">
-													<span class="navi-icon">
-														<i class="flaticon2-rocket-1"></i>
-													</span>
-                                <span class="navi-text">Groups</span>
-                                <span class="navi-link-badge">
-														<span
-                                                            class="label label-light-primary label-inline font-weight-bold">new</span>
-													</span>
-                            </a>
-                        </li>
-                        <li class="navi-item">
-                            <a href="#" class="navi-link">
-													<span class="navi-icon">
-														<i class="flaticon2-bell-2"></i>
-													</span>
-                                <span class="navi-text">Calls</span>
-                            </a>
-                        </li>
-                        <li class="navi-item">
-                            <a href="#" class="navi-link">
-													<span class="navi-icon">
-														<i class="flaticon2-gear"></i>
-													</span>
-                                <span class="navi-text">Settings</span>
-                            </a>
-                        </li>
-                        <li class="navi-separator my-3"></li>
-                        <li class="navi-item">
-                            <a href="#" class="navi-link">
-													<span class="navi-icon">
-														<i class="flaticon2-magnifier-tool"></i>
-													</span>
-                                <span class="navi-text">Help</span>
-                            </a>
-                        </li>
-                        <li class="navi-item">
-                            <a href="#" class="navi-link">
-													<span class="navi-icon">
-														<i class="flaticon2-bell-2"></i>
-													</span>
-                                <span class="navi-text">Privacy</span>
-                                <span class="navi-link-badge">
-														<span
-                                                            class="label label-light-danger label-rounded font-weight-bold">5</span>
-													</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <!--end::Navigation-->
-                </div>
-                <!--end::Dropdown-->
-            </div>
-            <!--end::Create-->
-            <!--begin::Quick Panel-->
-            <div class="topbar-item mr-4">
-                <div class="btn btn-icon btn-sm btn-clean btn-text-dark-75 btn-dropdown"
-                     id="kt_quick_panel_toggle">
-										<span class="svg-icon svg-icon-lg">
-											<!--begin::Svg Icon | path:/metronic/theme/html/demo5/dist/assets/media/svg/icons/Media/Equalizer.svg-->
-											<svg xmlns="http://www.w3.org/2000/svg"
-                                                 xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                                 viewBox="0 0 24 24" version="1.1">
-												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-													<rect x="0" y="0" width="24" height="24"/>
-													<rect fill="#000000" opacity="0.3" x="13" y="4" width="3"
-                                                          height="16" rx="1.5"/>
-													<rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5"/>
-													<rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5"/>
-													<rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5"/>
-												</g>
-											</svg>
-                                            <!--end::Svg Icon-->
-										</span>
-                </div>
-            </div>
-            <!--end::Quick Actions-->
-            <!--begin::Quick Actions-->
-            <div class="topbar-item mr-4">
-                <div class="btn btn-icon btn-sm btn-clean btn-text-dark-75" id="kt_quick_actions_toggle">
-										<span class="svg-icon svg-icon-lg">
-											<!--begin::Svg Icon | path:/metronic/theme/html/demo5/dist/assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
-											<svg xmlns="http://www.w3.org/2000/svg"
-                                                 xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                                 viewBox="0 0 24 24" version="1.1">
-												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-													<rect x="0" y="0" width="24" height="24"/>
-													<rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"/>
-													<path
-                                                        d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
-                                                        fill="#000000" opacity="0.3"/>
-												</g>
-											</svg>
-                                            <!--end::Svg Icon-->
-										</span>
-                </div>
-            </div>
-            <!--end::Quick panel-->
-            <!--begin::User-->
-            <div class="topbar-item mr-4">
-                <div class="btn btn-icon btn-sm btn-clean btn-text-dark-75" id="kt_quick_user_toggle">
-										<span class="svg-icon svg-icon-lg">
-											<!--begin::Svg Icon | path:/metronic/theme/html/demo5/dist/assets/media/svg/icons/General/User.svg-->
-											<svg xmlns="http://www.w3.org/2000/svg"
-                                                 xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                                 viewBox="0 0 24 24" version="1.1">
-												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-													<polygon points="0 0 24 0 24 24 0 24"/>
-													<path
-                                                        d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
-                                                        fill="#000000" fill-rule="nonzero" opacity="0.3"/>
-													<path
-                                                        d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
-                                                        fill="#000000" fill-rule="nonzero"/>
-												</g>
-											</svg>
-                                            <!--end::Svg Icon-->
-										</span>
-                </div>
-            </div>
-            <!--end::User-->
-            <!--begin::Notifications-->
-            <div class="topbar-item">
-                <div class="btn btn-icon btn-sm btn-primary font-weight-bolder p-0"
-                     id="kt_quick_notifications_toggle">3
-                </div>
-            </div>
-            <!--end::Notifications-->
         </div>
-        <!--end::Topbar-->
     </div>
-    <!--end::Container-->
-</div>
-<!--end::Header-->
+</nav>
+
