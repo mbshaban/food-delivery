@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="rtl">
-  
-<!-- Mirrored from pixinvent.com/bootstrap-admin-template/robust/html/rtl/vertical-content-menu-template/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 13 Feb 2021 08:50:32 GMT -->
 
   @include('website/include/head')
   <body class="vertical-layout vertical-content-menu 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-content-menu" data-col="2-columns">
