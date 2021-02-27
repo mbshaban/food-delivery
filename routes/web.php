@@ -18,8 +18,8 @@ Route::get('dashboard', function () {
     return view('dashboard.index');
 });
 
-Route::get('sellers', function (){
-	return view('dashboard.seller');
+Route::get('dashboard/sellers', function (){
+	return view('dashboard.sellers.sellers');
 });
 Route::get('dashboard/products/insert', function (){
 	return view('dashboard.products.insert');

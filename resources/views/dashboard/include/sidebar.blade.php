@@ -41,7 +41,7 @@
 {{--                    </li>--}}
 {{--                </ul>--}}
 {{--            </li>--}}
-            <li class=" nav-item"><a href="#"><i class="icon-user"></i><span class="menu-title" data-i18n="nav.templates.main">کابران</span></a>
+            <li class=" nav-item"><a href="#"><i class="icon-user"></i><span class="menu-title" data-i18n="nav.templates.main">کاربران</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">نمایش</a> </li>
                     <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">اضافه نمودن</a> </li>
