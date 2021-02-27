@@ -13,10 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// -------------- dashboard ----------------
 Route::get('dashboard', function () {
     return view('dashboard.index');
 });
 
 Route::get('sellers', function (){
 	return view('dashboard.seller');
+});
+Route::get('dashboard/products/insert', function (){
+	return view('dashboard.products.insert');
 });
