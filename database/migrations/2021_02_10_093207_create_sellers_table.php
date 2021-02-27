@@ -20,9 +20,9 @@ class CreateSellersTable extends Migration
             $table->string('owner_name');
             $table->string('logo');
             $table->string('full_address');
-            $table->text('geolocation');
-            $table->string('village');
-            $table->string('order_status');
+            $table->text('geolocation')->nullable();
+            $table->string('village')->nullable();
+            $table->string('order_status')->nullable();
             $table->timestamps();
         });
         Schema::table('sellers', function(Blueprint $table){

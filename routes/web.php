@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\SellersController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,9 +18,12 @@ Route::get('dashboard', function () {
     return view('dashboard.index');
 });
 
-Route::get('dashboard/sellers', function (){
-	return view('dashboard.sellers.sellers');
+
+Route::prefix('dashboard/sellers')->group(function () {
+    Route::get('/', [SellersController::class, 'index']);
+    Route::post('/insert', [SellersController::class, 'insert']);
 });
+
 Route::get('dashboard/products/insert', function (){
 	return view('dashboard.products.insert');
 });
