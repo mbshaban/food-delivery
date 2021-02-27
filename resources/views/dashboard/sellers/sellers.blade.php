@@ -178,7 +178,7 @@
 		                <table id="project-task-list" class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle">
 					        <thead>
 					            <tr>
-					                <th>فروشگاه</th>
+					                <th>نام تجارت</th>
 					                <th>مالک</th>				                
 					                <th>نوع تجارت</th>				                
 					                <th>لوگو</th>
@@ -186,18 +186,15 @@
 					            </tr>
 					        </thead>
 					        <tbody>
+					        @forelse ($sellers as $seller)
 					            <tr>
-					                <td><h6 class="mb-0">Basics Tasks & Milestones in <span class="text-bold-600">ABC Project</span> on <em>30 Oct, 2017</em></h6></td>
-					                <td><span class="badge badge-default badge-warning">High</span></td>				                
-					                <td>
-					                	<div class="progress progress-sm">
-					                		<div aria-valuemin="20" aria-valuemax="100" class="progress-bar bg-gradient-x-danger" role="progressbar" style="width:20%" aria-valuenow="20"></div>
-					                	</div>
-					                </td>
+					                <td><h6 class="mb-0">{{$seller->business_name}}</td>
+					                <td><span class="badge badge-default badge-warning">{{$seller->owner_name}}</span></td>				                
+					                <td>{{$seller->seller_type}}</td>
 					                
 					                <td class="text-center">
 					                	<span class="avatar avatar-online">
-					                		<img src="../../../app-assets/images/portrait/small/avatar-s-6.png" alt="avatar"  data-placement="right" title="Nicole Barrett"><i></i>
+					                		<img src="{{url('dashboard/sellers/logo/'.$seller->logo)}}" alt="avatar" data-placement="right" title="{{$seller->logo}}" style="width: 100%">
 					                	</span>
 					                </td>
 					                <td>
@@ -214,7 +211,8 @@
 					                    </span>
 					                </td>
 					            </tr>
-
+					        @empty
+					        @endforelse
 
 					        </tbody>
 					        <tfoot>

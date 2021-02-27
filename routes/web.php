@@ -22,16 +22,24 @@ Route::get('dashboard', function () {
 Route::prefix('dashboard/sellers')->group(function () {
     Route::get('/', [SellersController::class, 'index']);
     Route::post('/insert', [SellersController::class, 'insert']);
+    Route::get('/logo/{file_name}', function ($filename) {
+	    $path = storage_path('app') . '/logos/' . $filename;
+	    $image = \File::get($path);
+	    $mime = \File::mimeType($path);
+	    return \Response::make($image, 200)->header('Content-Type', $mime);
+	});
 });
 
 Route::get('dashboard/products/insert', function (){
-	return view('dashboard.products.insert');
-
+ 	return view('dashboard.products.insert');
+});
 Route::get('dashboard/products/insert', function () {
     return view('dashboard.products.insert');
 });
 Route::get('/dashboard/categories', [CategoriesController::class, 'listCategories']);
+
 Route::post('/dashboard/category/add-category', [CategoriesController::class, 'addProductCategory']);
+
 Route::get('/dashboard/category/category-image/categoryImage/{file_name}', function ($filename) {
     $path = storage_path('app') . '/categoryImage/' . $filename;
     $image = \File::get($path);

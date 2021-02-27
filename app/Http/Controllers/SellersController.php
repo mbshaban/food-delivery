@@ -12,7 +12,8 @@ class SellersController extends Controller
 {
 	public function index(){
 		$districts = Districts::where('provinces_id', 1)->get();
-		return view('dashboard.sellers.sellers', compact('districts'));
+        $sellers = Sellers::all();
+		return view('dashboard.sellers.sellers', compact('districts', 'sellers'));
 	}
 
     public function insert(Request $request){
