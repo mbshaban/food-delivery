@@ -70,7 +70,5 @@ class SellersController extends Controller
 
         return $imgpath;
                 
-                
-            
     }
 }

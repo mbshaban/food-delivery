@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellersController;
 /*
@@ -18,7 +19,6 @@ Route::get('dashboard', function () {
     return view('dashboard.index');
 });
 
-
 Route::prefix('dashboard/sellers')->group(function () {
     Route::get('/', [SellersController::class, 'index']);
     Route::post('/insert', [SellersController::class, 'insert']);
@@ -26,4 +26,16 @@ Route::prefix('dashboard/sellers')->group(function () {
 
 Route::get('dashboard/products/insert', function (){
 	return view('dashboard.products.insert');
+
+Route::get('dashboard/products/insert', function () {
+    return view('dashboard.products.insert');
+});
+Route::get('/dashboard/categories', [CategoriesController::class, 'listCategories']);
+Route::post('/dashboard/category/add-category', [CategoriesController::class, 'addProductCategory']);
+Route::get('/dashboard/category/category-image/categoryImage/{file_name}', function ($filename) {
+    $path = storage_path('app') . '/categoryImage/' . $filename;
+    $image = \File::get($path);
+    $mime = \File::mimeType($path);
+    return \Response::make($image, 200)->header('Content-Type', $mime);
+
 });
