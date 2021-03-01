@@ -6,7 +6,11 @@
             <!--begin::Container-->
             <div class="container">
                 <!--begin::Dashboard-->
-
+                @if(session()->has('message'))
+				    <div class="alert alert-success">
+				        {{ session()->get('message') }}
+				    </div>
+				@endif
                 <!--begin::Row-->
                 <section id="basic-form-layouts">
 	<div class="row match-height">
@@ -29,27 +33,27 @@
 						<div class="card-text">
 							<p>This is the most basic and default form having form sections. To add form section use <code>.form-section</code> class with any heading tags. This form has the buttons on the bottom left corner which is the default position.</p>
 						</div>
-						<form class="form">
+						<form class="form" action="{{url('/dashboard/sellers/insert')}}" method="POST" enctype="multipart/form-data">
+							{{ csrf_field() }}
 							<div class="form-body">
 								<h4 class="form-section"><i class="ft-user"></i>معلومات شخصی</h4>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="owner_name">نام مالک</label>
-											<input type="text" id="user_id" class="form-control" name="user_id" placeholder="user id">
 											<input type="text" id="owner_name" class="form-control" name="owner_name">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label for="owner_name">ایمل</label>
-											<input type="text" id="owner_name" class="form-control" name="owner_name">
+											<label for="email">ایمل</label>
+											<input type="text" id="email" class="form-control" name="email">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label for="owner_name">شماره تماس</label>
-											<input type="text" id="owner_name" class="form-control" name="owner_name">
+											<label for="phone">شماره تماس</label>
+											<input type="text" id="phone" class="form-control" name="phone">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -61,7 +65,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="seller_type">نوع تجارت</label>
-											<select id="seller_type" name="interested" class="form-control">
+											<select id="seller_type" name="seller_type" class="form-control">
 												<option value="none" selected="" disabled="">انتخاب</option>
 												<option value="resturant">رستورانت</option>
 												<option value="pastry">شیرنی فروشی</option>
@@ -76,6 +80,18 @@
 												<input type="file" name="logo" id="file">
 												<span class="file-custom"></span>
 											</label>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="password">پسورد</label>
+											<input type="password" id="password" class="form-control" name="password" placeholder="********">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="password_confirmation">تکرار پسورد</label>
+											<input type="password" id="password_confirmation" class="form-control" name="password_confirmation" placeholder="********">
 										</div>
 									</div>
 									
@@ -93,12 +109,13 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="district_id ">ولسوالی/ناحیه</label>
-											<select id="district_id " name="budget" class="form-control">
+											<select id="district_id " name="district_id" class="form-control">
 												<option value="0" selected="" disabled="">ناحیه</option>
-												<option value="less than 5000$">ناحیه اول</option>
-												<option value="5000$ - 10000$">ناحیه دوم</option>
-												<option value="10000$ - 20000$">ناحیه سوم</option>
-												<option value="more than 20000$">more than 20000$</option>
+												@forelse ($districts as $district)
+												<option value="{{ $district->id }}">{{ $district->district_name }}</option>
+												@empty
+												<option></option>
+												@endforelse
 											</select>
 										</div>
 									</div>
@@ -113,7 +130,7 @@
 								
 								<div class="form-group">
 									<label for="geolocation">موقعیت جغرافیایی</label>
-									<textarea id="geolocation" rows="5" class="form-control" name="comment" placeholder="موقعیت جغرافیایی"></textarea>
+									<textarea id="geolocation" rows="5" class="form-control" name="geolocation" placeholder="موقعیت جغرافیایی"></textarea>
 								</div>
 							</div>
 
@@ -161,7 +178,7 @@
 		                <table id="project-task-list" class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle">
 					        <thead>
 					            <tr>
-					                <th>فروشگاه</th>
+					                <th>نام تجارت</th>
 					                <th>مالک</th>				                
 					                <th>نوع تجارت</th>				                
 					                <th>لوگو</th>
@@ -169,18 +186,15 @@
 					            </tr>
 					        </thead>
 					        <tbody>
+					        @forelse ($sellers as $seller)
 					            <tr>
-					                <td><h6 class="mb-0">Basics Tasks & Milestones in <span class="text-bold-600">ABC Project</span> on <em>30 Oct, 2017</em></h6></td>
-					                <td><span class="badge badge-default badge-warning">High</span></td>				                
-					                <td>
-					                	<div class="progress progress-sm">
-					                		<div aria-valuemin="20" aria-valuemax="100" class="progress-bar bg-gradient-x-danger" role="progressbar" style="width:20%" aria-valuenow="20"></div>
-					                	</div>
-					                </td>
+					                <td><h6 class="mb-0">{{$seller->business_name}}</td>
+					                <td><span class="badge badge-default badge-warning">{{$seller->owner_name}}</span></td>				                
+					                <td>{{$seller->seller_type}}</td>
 					                
 					                <td class="text-center">
 					                	<span class="avatar avatar-online">
-					                		<img src="../../../app-assets/images/portrait/small/avatar-s-6.png" alt="avatar"  data-placement="right" title="Nicole Barrett"><i></i>
+					                		<img src="{{url('dashboard/sellers/logo/'.$seller->logo)}}" alt="avatar" data-placement="right" title="{{$seller->logo}}" style="width: 100%">
 					                	</span>
 					                </td>
 					                <td>
@@ -197,7 +211,8 @@
 					                    </span>
 					                </td>
 					            </tr>
-
+					        @empty
+					        @endforelse
 
 					        </tbody>
 					        <tfoot>
