@@ -53,7 +53,7 @@ class CategoriesController extends Controller
 //        if (Auth::user()->role === 'admin') {
         $categories = Categories::select('type', 'category_webaddress', 'category_name', 'category_image', 'category_description', 'id')
             ->latest('categories.created_at')
-            ->paginate(2);
+            ->paginate(5);
         return view('dashboard.category.category', compact('categories'));
 //        } elseif (Auth::user()->role === 'blogger') {
 //            $blogs = Blog::select('blog.title', 'blog.created_at', 'language', 'author', 'blog.id', 'blog.user_id')

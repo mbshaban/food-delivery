@@ -119,7 +119,7 @@
                                     <!-- Task List table -->
                                     <div class="table-responsive">
                                         <table id="project-task-list"
-                                               class="table table-white-space table-bordered row-grouping display wrap-border icheck table-middle">
+                                               class="table ">
                                             <thead>
                                             <tr>
                                                 <th> نوعیت کتگوری</th>
@@ -127,7 +127,8 @@
                                                 <th>نام کتگوری</th>
                                                 <th>توضیحات کتگوری</th>
                                                 <th>تصویر کتگوری</th>
-                                                <th>اکشن</th>
+                                                <th>بروز رسان</th>
+                                                <th>حذف</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -137,9 +138,10 @@
                                                     <td>{{$category->category_webaddress}}</td>
                                                     <td>{{$category->category_name}}</td>
                                                     <td class="table-text-wrap" style="word-wrap: break-word;
-
-white-space: normal !important;
-text-align: justify;">{{$category->category_description}}</td>
+                                                        white-space: normal !important;
+                                                        text-align: justify;">
+                                                        {{$category->category_description}}
+                                                    </td>
                                                     <td class="text-center">
                                                         <img
                                                             src="{{url('dashboard/category/category-image/categoryImage/'.$category->category_image)}}"
@@ -148,25 +150,41 @@ text-align: justify;">{{$category->category_description}}</td>
                                                         ><i></i>
 
                                                     </td>
+                                                    {{--                                                    <td>--}}
+                                                    {{--					                	<span class="dropdown">--}}
+                                                    {{--					                        <button id="btnSearchDrop4" type="button" data-toggle="dropdown"--}}
+                                                    {{--                                                    aria-haspopup="true" aria-expanded="false"--}}
+                                                    {{--                                                    class="btn btn-info dropdown-toggle"><i--}}
+                                                    {{--                                                    class="fa fa-cog"></i></button>--}}
+                                                    {{--					                        <span aria-labelledby="btnSearchDrop4"--}}
+                                                    {{--                                                  class="dropdown-menu mt-1 dropdown-menu-right">--}}
+                                                    {{--					                            <a href="#" class="dropdown-item"><i class="ft-eye"></i> Open Task</a>--}}
+                                                    {{--					                            <a href="#" class="dropdown-item"><i--}}
+                                                    {{--                                                        class="ft-edit-2"></i> Edit Task</a>--}}
+                                                    {{--					                            <a href="#" class="dropdown-item"><i class="ft-check"></i> Complete Task</a>--}}
+                                                    {{--					                            <a href="#" class="dropdown-item"><i--}}
+                                                    {{--                                                        class="ft-upload"></i> Assign to</a>--}}
+                                                    {{--					                            <div class="dropdown-divider"></div>--}}
+                                                    {{--					                            <a href="#" class="dropdown-item"><i--}}
+                                                    {{--                                                        class="ft-trash"></i> Delete Task</a>--}}
+                                                    {{--					                        </span>--}}
+                                                    {{--					                    </span>--}}
+                                                    {{--                                                    </td>--}}
                                                     <td>
-					                	<span class="dropdown">
-					                        <button id="btnSearchDrop4" type="button" data-toggle="dropdown"
-                                                    aria-haspopup="true" aria-expanded="false"
-                                                    class="btn btn-info dropdown-toggle"><i
-                                                    class="fa fa-cog"></i></button>
-					                        <span aria-labelledby="btnSearchDrop4"
-                                                  class="dropdown-menu mt-1 dropdown-menu-right">
-					                            <a href="#" class="dropdown-item"><i class="ft-eye"></i> Open Task</a>
-					                            <a href="#" class="dropdown-item"><i
-                                                        class="ft-edit-2"></i> Edit Task</a>
-					                            <a href="#" class="dropdown-item"><i class="ft-check"></i> Complete Task</a>
-					                            <a href="#" class="dropdown-item"><i
-                                                        class="ft-upload"></i> Assign to</a>
-					                            <div class="dropdown-divider"></div>
-					                            <a href="#" class="dropdown-item"><i
-                                                        class="ft-trash"></i> Delete Task</a>
-					                        </span>
-					                    </span>
+                                                        <button title="بروز رساین"
+                                                                onclick="window.location='{{ url('dashboard/blog/update-blog-view/'.$category->id) }}'"
+                                                                class="btn btn-success">
+                                                            <i
+                                                                class="fa fa-edit"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button onclick="deleteSlider({{$category->id}})"
+                                                                title="حذف"
+                                                                class="btn btn-danger">
+                                                            <i
+                                                                class="fa fa-times"></i>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             @endforeach
