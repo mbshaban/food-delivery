@@ -1,13 +1,8 @@
 @extends('dashboard.layout.layout')
 @section('content')
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-        <!--begin::Entry-->
         <div class="d-flex flex-column-fluid">
-            <!--begin::Container-->
             <div class="container">
-                <!--begin::Dashboard-->
-
-                <!--begin::Row-->
                 <section id="basic-form-layouts">
                     <div class="row match-height">
                         <div class="col-md-12">
@@ -44,7 +39,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="owner_name">کتگوری وب آدرس</label>
+                                                            <label for="owner_name">آدرس وب کتگوری</label>
                                                             <input type="text" id="owner_name" class="form-control"
                                                                    name="category_webaddress"
                                                                    placeholder="کتگوری وب آدرس">
@@ -89,7 +84,6 @@
 
                     </div>
                 </section>
-                <!--end::Row-->
                 <section class="row">
                     <div class="col-12">
                         <div class="card">
@@ -119,7 +113,7 @@
                                     <!-- Task List table -->
                                     <div class="table-responsive">
                                         <table id="project-task-list"
-                                               class="table ">
+                                               class="table table-bordered ">
                                             <thead>
                                             <tr>
                                                 <th> نوعیت کتگوری</th>
@@ -137,75 +131,43 @@
                                                     <td>{{$category->type}}</td>
                                                     <td>{{$category->category_webaddress}}</td>
                                                     <td>{{$category->category_name}}</td>
-                                                    <td class="table-text-wrap" style="word-wrap: break-word;
-                                                        white-space: normal !important;
-                                                        text-align: justify;">
+                                                    <td class="table-text-wrap">
                                                         {{$category->category_description}}
                                                     </td>
                                                     <td class="text-center">
                                                         <img
                                                             src="{{url('dashboard/category/category-image/categoryImage/'.$category->category_image)}}"
                                                             alt="avatar" data-placement="right"
-                                                            title="Nicole Barrett" style="height: 200px"
-                                                        ><i></i>
-
+                                                            title="Nicole Barrett" style="height: 200px">
                                                     </td>
-                                                    {{--                                                    <td>--}}
-                                                    {{--					                	<span class="dropdown">--}}
-                                                    {{--					                        <button id="btnSearchDrop4" type="button" data-toggle="dropdown"--}}
-                                                    {{--                                                    aria-haspopup="true" aria-expanded="false"--}}
-                                                    {{--                                                    class="btn btn-info dropdown-toggle"><i--}}
-                                                    {{--                                                    class="fa fa-cog"></i></button>--}}
-                                                    {{--					                        <span aria-labelledby="btnSearchDrop4"--}}
-                                                    {{--                                                  class="dropdown-menu mt-1 dropdown-menu-right">--}}
-                                                    {{--					                            <a href="#" class="dropdown-item"><i class="ft-eye"></i> Open Task</a>--}}
-                                                    {{--					                            <a href="#" class="dropdown-item"><i--}}
-                                                    {{--                                                        class="ft-edit-2"></i> Edit Task</a>--}}
-                                                    {{--					                            <a href="#" class="dropdown-item"><i class="ft-check"></i> Complete Task</a>--}}
-                                                    {{--					                            <a href="#" class="dropdown-item"><i--}}
-                                                    {{--                                                        class="ft-upload"></i> Assign to</a>--}}
-                                                    {{--					                            <div class="dropdown-divider"></div>--}}
-                                                    {{--					                            <a href="#" class="dropdown-item"><i--}}
-                                                    {{--                                                        class="ft-trash"></i> Delete Task</a>--}}
-                                                    {{--					                        </span>--}}
-                                                    {{--					                    </span>--}}
-                                                    {{--                                                    </td>--}}
                                                     <td>
                                                         <button title="بروز رساین"
                                                                 onclick="window.location='{{ url('dashboard/blog/update-blog-view/'.$category->id) }}'"
                                                                 class="btn btn-success">
-                                                            <i
-                                                                class="fa fa-edit"></i>
+                                                            <i class="fa fa-edit"></i>
                                                         </button>
                                                     </td>
                                                     <td>
                                                         <button onclick="deleteSlider({{$category->id}})"
                                                                 title="حذف"
                                                                 class="btn btn-danger">
-                                                            <i
-                                                                class="fa fa-times"></i>
+                                                            <i class="fa fa-times"></i>
                                                         </button>
                                                     </td>
                                                 </tr>
                                             @endforeach
-
-
                                             </tbody>
                                         </table>
                                         <div class="mt-4 mr-4">
-                                            {{$categories->onEachSide(3)->links()}}
+                                            {{$categories->links()}}
                                         </div>
                                     </div>
-                                    <!--/ Task List table -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
-                <!--end::Dashboard-->
             </div>
-            <!--end::Container-->
         </div>
-        <!--end::Entry-->
     </div>
 @stop
