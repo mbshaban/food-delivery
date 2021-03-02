@@ -14,9 +14,6 @@
                                     <div class="heading-elements">
                                         <ul class="list-inline mb-0">
                                             <li><a data-action="collapse"><i class="ft-plus"></i></a></li>
-                                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                            <li><a data-action="close"><i class="ft-x"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -89,31 +86,13 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">لیست کتگوری</h4>
-                                <a class="heading-elements-toggle"><i class="ft-ellipsis-h font-medium-3"></i></a>
-                                <div class="heading-elements">
-                                    <button class="btn btn-primary btn-sm"><i class="ft-plus white"></i> New Task
-                                    </button>
-                                    <span class="dropdown">
-                        <button id="btnSearchDrop1" type="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false"
-                                class="btn btn-warning btn-sm dropdown-toggle dropdown-menu-right"><i
-                                class="ft-download white"></i></button>
-                        <span aria-labelledby="btnSearchDrop1" class="dropdown-menu mt-1 dropdown-menu-right">
-                            <a href="#" class="dropdown-item"><i class="fa fa-calendar"></i> Due Date</a>
-                            <a href="#" class="dropdown-item"><i class="fa fa-random"></i> Priority </a>
-                            <a href="#" class="dropdown-item"><i class="fa fa-bar-chart"></i> Progress</a>
-                            <a href="#" class="dropdown-item"><i class="fa fa-user"></i> Assign to</a>
-                        </span>
-                    </span>
-                                    <button class="btn btn-success btn-sm"><i class="ft-settings white"></i></button>
-                                </div>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
                                     <!-- Task List table -->
                                     <div class="table-responsive">
                                         <table id="project-task-list"
-                                               class="table table-bordered ">
+                                               class="table table-bordered w-auto ">
                                             <thead>
                                             <tr>
                                                 <th> نوعیت کتگوری</th>
@@ -141,20 +120,47 @@
                                                             title="Nicole Barrett" style="height: 200px">
                                                     </td>
                                                     <td>
-                                                        <button title="بروز رساین"
-                                                                onclick="window.location='{{ url('dashboard/blog/update-blog-view/'.$category->id) }}'"
+                                                        <button title="بروز رسانی"
+                                                                onclick="window.location='{{ url('dashboard/category/update-category-view/'.$category->id) }}'"
                                                                 class="btn btn-success">
                                                             <i class="fa fa-edit"></i>
                                                         </button>
                                                     </td>
                                                     <td>
-                                                        <button onclick="deleteSlider({{$category->id}})"
+                                                        <button onclick="" data-toggle="modal" data-target="#delete"
                                                                 title="حذف"
                                                                 class="btn btn-danger">
                                                             <i class="fa fa-times"></i>
                                                         </button>
                                                     </td>
                                                 </tr>
+                                                <div id="delete" class="modal fade" role="dialog">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                {{--                                                                <h2 class="modal-title text-right">پنجره تاییدی</h2>--}}
+                                                                <button type="button" class="close text-left "
+                                                                        data-dismiss="modal">&times;
+                                                                </button>
+
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h4 align="center" style="margin: 0"> مطمین هستید که می
+                                                                    خواهید این اطلاعات را حذف کنید؟</h4>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" data-dismiss="modal"
+                                                                        class="btn btn-warning">لغو
+                                                                </button>
+                                                                <button type="button"
+                                                                        onclick="deleteCategory({{$category->id}})"
+                                                                        class="btn btn-danger">تایید
+                                                                </button>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             @endforeach
                                             </tbody>
                                         </table>
@@ -170,4 +176,19 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        function deleteCategory(id) {
+            $.ajax({
+                url: "delete-category",
+                type: "GET",
+                data: {'id': id},
+                dataType: "text",
+                success: function (monitordata) {
+                    if (monitordata === "success") {
+                        window.location.href = 'categories';
+                    }
+                }
+            });
+        }
+    </script>
 @stop

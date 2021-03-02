@@ -79,18 +79,6 @@
                     <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">اضافه نمودن</a> </li>
                 </ul>
             </li>
-
-
-            <li class=" navigation-header"><span data-i18n="nav.category.charts_maps">Charts &amp; Maps</span><i class="ft-more-horizontal ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="Charts &amp; Maps"></i>
-            </li>
-            <li class=" nav-item"><a href="rickshaw-charts.html"><i class="icon-compass"></i><span class="menu-title" data-i18n="nav.rickshaw_charts.main">Rickshaw Charts</span></a>
-            </li>
-            <li class=" navigation-header"><span data-i18n="nav.category.support">Support</span><i class="ft-more-horizontal ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="Support"></i>
-            </li>
-            <li class=" nav-item"><a href="http://support.pixinvent.com/"><i class="icon-support"></i><span class="menu-title" data-i18n="nav.support_raise_support.main">Raise Support</span></a>
-            </li>
-            <li class=" nav-item"><a href="https://pixinvent.com/robust-bootstrap-admin-template/documentation"><i class="icon-notebook"></i><span class="menu-title" data-i18n="nav.support_documentation.main">Documentation</span></a>
-            </li>
         </ul>
     </div>
 </div>

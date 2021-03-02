@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellersController;
 use App\Http\Controllers\CustomersController;
@@ -46,16 +47,15 @@ Route::prefix('dashboard/customers')->group(function () {
     });
 });
 
-Route::get('dashboard/products/insert', function (){
- 	return view('dashboard.products.insert');
-});
-Route::get('dashboard/products/insert', function () {
-    return view('dashboard.products.insert');
-});
+Route::get('dashboard/products', [ProductsController::class, 'listProducts']);
+
+
+//Categories
 Route::get('/dashboard/categories', [CategoriesController::class, 'listCategories']);
-
 Route::post('/dashboard/category/add-category', [CategoriesController::class, 'addProductCategory']);
-
+Route::get('/dashboard/delete-category', [CategoriesController::class, 'deleteProductCategory']);
+Route::get('/dashboard/category/update-category-view/{id}', [CategoriesController::class, 'showUpdateCategoryView']);
+Route::post('/dashboard/category/update-category/{id}', [CategoriesController::class, 'updateCategory']);
 Route::get('/dashboard/category/category-image/categoryImage/{file_name}', function ($filename) {
     $path = storage_path('app') . '/categoryImage/' . $filename;
     $image = \File::get($path);
