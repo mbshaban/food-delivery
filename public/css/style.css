@@ -1,5 +1,5 @@
 .table-text-wrap{
-    /*word-wrap: break-word;*/
-    /*white-space: normal !important;*/
-    /*text-align: justify;*/
+    word-wrap: break-word;
+    white-space: normal !important;
+    text-align: justify;
 }

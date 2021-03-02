@@ -41,6 +41,9 @@
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style-rtl.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/solid.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css')}}">
+
 
     <!-- END Custom CSS-->
 </head>
