@@ -102,7 +102,6 @@ class CategoriesController extends Controller
 //        if (Auth::user()->role === 'admin' || Auth::user()->role === 'blogger') {
 
         $data = Categories::where('id', $id)->first();
-        Log::info($data);
         return view('dashboard.category.edit-category', compact('data'));
 //        } else {
 //            App::abort(503);

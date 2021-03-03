@@ -22,7 +22,7 @@
                                         <div class="card-text">
                                             <p> محصولات تان را اینجا اضافه نمایید</p>
                                         </div>
-                                        <form method="POST" action="{{url('dashboard/products/add-product')}}"
+                                        <form method="POST" action="{{url('product')}}"
                                               enctype="multipart/form-data">
                                             {{ csrf_field() }}
                                             <div class="form-body">
@@ -155,7 +155,7 @@
                                                     </td>
                                                     <td>
                                                         <button title="بروز رسانی"
-                                                                onclick="window.location='{{ url('dashboard/category/update-category-view/'.$category->id) }}'"
+                                                                onclick="window.location='{{ url('dashboard/product/update-product-view/'.$product->id) }}'"
                                                                 class="btn btn-success">
                                                             <i class="fa fa-edit"></i>
                                                         </button>
@@ -172,11 +172,9 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                {{--                                                                <h2 class="modal-title text-right">پنجره تاییدی</h2>--}}
                                                                 <button type="button" class="close text-left "
                                                                         data-dismiss="modal">&times;
                                                                 </button>
-
                                                             </div>
                                                             <div class="modal-body">
                                                                 <h4 align="center" style="margin: 0"> مطمین هستید که می
@@ -199,7 +197,7 @@
                                             </tbody>
                                         </table>
                                         <div class="mt-4 mr-4">
-                                            {{$categories->links()}}
+                                            {{$products->links()}}
                                         </div>
                                     </div>
                                 </div>
@@ -222,7 +220,6 @@
                         window.location.href = 'products';
                     }
                 }
-            });
-        }
+           product     }
     </script>
 @stop

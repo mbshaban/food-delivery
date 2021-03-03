@@ -47,10 +47,11 @@ Route::prefix('dashboard/customers')->group(function () {
     });
 });
 
-Route::get('dashboard/products', [ProductsController::class, 'listProducts']);
+Route::get('/dashboard/products', [ProductsController::class, 'listProducts']);
 Route::post('/dashboard/products/add-product', [ProductsController::class, 'addProduct']);
 Route::get('/dashboard/delete-product', [ProductsController::class, 'deleteProduct']);
-
+Route::get('/dashboard/product/update-product-view/{id}',[ProductsController::class,'updateProductView']);
+Route::post('/dashboard/products/update-product/{id}',[ProductsController::class,'updateProduct']);
 Route::get('/dashboard/products/product-image/productImage/{file_name}', function ($filename) {
     $path = storage_path('app') . '/productImage/' . $filename;
     $image = \File::get($path);
