@@ -29,7 +29,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="email">ایمل</label>
-											<input type="text" id="email" class="form-control  @error('email') is-invalid @enderror"" name="email" value="{{auth()->user()->email}}">
+											<input type="text" id="email" class="form-control  @error('email') is-invalid @enderror" name="email" value="{{auth()->user()->email}}">
 											@error('email')
 		                                    <span class="invalid-feedback" role="alert">
 		                                        <strong>{{ $message }}</strong>
@@ -60,22 +60,20 @@
 								<div class="row">
 									<div class="col-md-6">
 										<label for="customer_name">نام</label>
-										<input type="text" id="customer_name" name="customer_name" class="form-control" placeholder="نام" value="{{$customer->customer_name}}">
+										<input type="text" id="customer_name" name="customer_name" class="form-control" placeholder="نام" value="@if($customer) {{$customer->customer_name}} @endif">
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="district_id ">ولسوالی/ناحیه</label>
 											<select id="district_id " name="district_id" class="form-control">
 												@forelse ($districts as $district)
-													@if($district->id == $customer->district_id)
+													@if($customer && ($district->id == $customer->district_id))
 													<option value="{{ $district->id }}">{{ $district->district_name }}</option>
 													@endif
 												@empty
 												@endforelse
 												@forelse ($districts as $district)
-													@if($district->id != $customer->district_id)
 													<option value="{{ $district->id }}">{{ $district->district_name }}</option>
-													@endif
 												@empty
 												@endforelse
 											</select>
@@ -84,7 +82,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="village">قریه/ساحه</label>
-											<input type="text" id="village" name="village" class="form-control" placeholder="قریه/ساحه" value="{{$customer->village}}">
+											<input type="text" id="village" name="village" class="form-control" placeholder="قریه/ساحه" value="@if($customer) {{$customer->village}} @endif">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -99,11 +97,11 @@
 								</div>
 								<div class="form-group">
 									<label for="full_address">آدرس مکمل</label>
-									<input type="text" id="full_address" name="full_address" class="form-control" placeholder="نام" value="{{$customer->full_address}}">
+									<input type="text" id="full_address" name="full_address" class="form-control" placeholder="نام" value="@if($customer) {{$customer->full_address}} @endif">
 								</div>
 								<div class="form-group">
 									<label for="geolocation">موقعیت جغرافیایی</label>
-									<textarea id="geolocation" rows="5" class="form-control" name="geolocation" placeholder="موقعیت جغرافیایی">{{$customer->customer_name}}</textarea>
+									<textarea id="geolocation" rows="5" class="form-control" name="geolocation" placeholder="موقعیت جغرافیایی">@if($customer) {{$customer->customer_name}} @endif</textarea>
 								</div>
 							</div>
 
