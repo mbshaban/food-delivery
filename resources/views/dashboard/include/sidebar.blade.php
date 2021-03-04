@@ -17,8 +17,8 @@
             </li>
             <li class=" nav-item"><a href="#"><i class="icon-user"></i><span class="menu-title" data-i18n="nav.templates.main">کاربران</span></a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">نمایش</a> </li>
-                    <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">اضافه نمودن</a> </li>
+                    <li><a class="menu-item" href="{{url('dashboard/customers')}}" data-i18n="nav.templates.vert.main">نمایش</a> </li>
+                    <li><a class="menu-item" href="{{url('dashboard/customers/settings')}}" data-i18n="nav.templates.vert.main">اضافه نمودن</a> </li>
                 </ul>
             </li>
             <li class=" nav-item"><a href="#"><i class="icon-screen-tablet"></i><span class="menu-title" data-i18n="nav.templates.main">سلایدر</span></a>
@@ -61,8 +61,8 @@
             </li>
             <li class=" nav-item"><a href="#"><i class="icon-screen-tablet"></i><span class="menu-title" data-i18n="nav.templates.main">نظریات مشتریان</span></a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">نمایش</a> </li>
-                    <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">اضافه نمودن</a> </li>
+                    <li><a class="menu-item" href="{{url('dashboard/customers')}}" data-i18n="nav.templates.vert.main">نمایش</a> </li>
+                    <li><a class="menu-item" href="{{url('dashboard/customers/settings')}}" data-i18n="nav.templates.vert.main">تنظیمات</a> </li>
                 </ul>
             </li>
             <li class=" navigation-header"><span data-i18n="nav.category.charts_maps">فروشنده ها</span><i class="ft-more-horizontal ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="Charts &amp; Maps"></i>
@@ -75,8 +75,8 @@
             </li>
             <li class=" nav-item"><a href="#"><i class="icon-screen-tablet"></i><span class="menu-title" data-i18n="nav.templates.main">مشتریان</span></a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">نمایش</a> </li>
-                    <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">اضافه نمودن</a> </li>
+                    <li><a class="menu-item" href="{{url('dashboard/customers')}}" data-i18n="nav.templates.vert.main">نمایش</a> </li>
+                    <li><a class="menu-item" href="{{url('dashboard/customers/settings')}}" data-i18n="nav.templates.vert.main">تنظیمات</a> </li>
                 </ul>
             </li>
         </ul>

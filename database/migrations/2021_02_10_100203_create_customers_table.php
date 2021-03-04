@@ -16,11 +16,11 @@ class CreateCustomersTable extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('customer_name');
-            $table->boolean('isMale');
-            $table->string('profile_picture');
-            $table->string('full_address');
-            $table->string('geolocation');
-            $table->string('village');
+            $table->boolean('isMale')->nullable();
+            $table->string('profile_picture')->nullable();
+            $table->string('full_address')->nullable();
+            $table->string('geolocation')->nullable();
+            $table->string('village')->nullable();
             $table->timestamps();
         });
         Schema::table('customers', function(Blueprint $table){

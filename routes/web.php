@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellersController;
 use App\Http\Controllers\CustomersController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,6 +39,10 @@ Route::prefix('dashboard/sellers')->group(function () {
 
 Route::prefix('dashboard/customers')->group(function () {
     Route::get('/', [CustomersController::class, 'index']);
+    Route::get('/settings', [CustomersController::class, 'settings']);
+    Route::post('/update-account', [CustomersController::class, 'updateAccount']);
+    Route::post('/update-info', [CustomersController::class, 'updateInfo']);
+    Route::post('/update-password', [CustomersController::class, 'updatePassword']);
     Route::post('/insert', [CustomersController::class, 'insert']);
     Route::get('/profile/{file_name}', function ($filename) {
         $path = storage_path('app') . '/profile/' . $filename;
