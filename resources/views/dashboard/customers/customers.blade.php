@@ -40,24 +40,29 @@
 		                <table id="project-task-list" class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle">
 					        <thead>
 					            <tr>
-					                <th>نام تجارت</th>
-					                <th>مالک</th>				                
-					                <th>نوع تجارت</th>				                
-					                <th>لوگو</th>
+					                <th>نام مشتری</th>
+					                <th>شماره تماس</th>				                
+					                <th>ناحیه</th>				                
+					                <th>منطقه</th>
+					                <th>عکس</th>
 					                <th>عمل</th>
 					            </tr>
 					        </thead>
 					        <tbody>
 					        @forelse ($customers as $seller)
 					            <tr>
-					                <td><h6 class="mb-0">{{$seller->business_name}}</td>
-					                <td><span class="badge badge-default badge-warning">{{$seller->owner_name}}</span></td>				                
-					                <td>{{$seller->seller_type}}</td>
-					                
+					                <td><h6 class="mb-0">{{$seller->customer_name}}</td>
+					                <td><span class="badge badge-default badge-warning">{{$seller->phone}}</span></td>				                
+					                <td>{{$seller->district_name}}</td>
+					                	
 					                <td class="text-center">
-					                	<span class="avatar avatar-online">
+					                	{{$seller->village}}
+					                </td>
+					                <td>
+					               		<span class="avatar avatar-online">
 					                		<img src="{{url('dashboard/sellers/logo/'.$seller->logo)}}" alt="avatar" data-placement="right" title="{{$seller->logo}}" style="width: 100%">
 					                	</span>
+					                	
 					                </td>
 					                <td>
 					                	<span class="dropdown">

@@ -22,7 +22,9 @@ class CustomersController extends Controller
 
     public function index(){
 		$districts = Districts::where('provinces_id', 1)->get();
-        $customers = Customers::where('user_id', Auth::user()->id)->first();
+        $customers = Customers::join('districts', 'customers.district_id', 'districts.id')
+        ->join('users', 'customers.user_id', 'users.id')
+        ->select('customers.*', 'districts.district_name', 'users.phone')->get();
 		return view('dashboard.customers.customers', compact('districts', 'customers'));
 	}
     public function settings(){
