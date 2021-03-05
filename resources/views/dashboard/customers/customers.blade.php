@@ -17,7 +17,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-            	<h4 class="card-title">فرمایش ها</h4>
+            	<h4 class="card-title">مشتریان</h4>
             	<a class="heading-elements-toggle"><i class="ft-ellipsis-h font-medium-3"></i></a>
         		<div class="heading-elements">
             		<button class="btn btn-primary btn-sm"><i class="ft-plus white"></i> New Task</button>

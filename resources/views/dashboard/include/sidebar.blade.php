@@ -49,13 +49,13 @@
             </li>
             <li class=" nav-item"><a href="#"><i class="icon-screen-tablet"></i><span class="menu-title" data-i18n="nav.templates.main">انتقالات</span></a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">نمایش</a> </li>
+                    <li><a class="menu-item" href="{{url('dashboard/delivers')}}" data-i18n="nav.templates.vert.main">نمایش</a> </li>
                     <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">اضافه نمودن</a> </li>
                 </ul>
             </li>
             <li class=" nav-item"><a href="#"><i class="icon-screen-tablet"></i><span class="menu-title" data-i18n="nav.templates.main">ساعات کاری</span></a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">نمایش</a> </li>
+                    <li><a class="menu-item" href="{{url('dashboard/delivers')}}" data-i18n="nav.templates.vert.main">نمایش</a> </li>
                     <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">اضافه نمودن</a> </li>
                 </ul>
             </li>

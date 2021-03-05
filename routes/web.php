@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellersController;
 use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\DeliversController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,17 @@ Route::prefix('dashboard/customers')->group(function () {
     Route::post('/insert', [CustomersController::class, 'insert']);
     Route::get('/profile/{file_name}', function ($filename) {
         $path = storage_path('app') . '/profile/' . $filename;
+        $image = \File::get($path);
+        $mime = \File::mimeType($path);
+        return \Response::make($image, 200)->header('Content-Type', $mime);
+    });
+});
+
+Route::prefix('dashboard/delivers')->group(function () {
+    Route::get('/', [DeliversController::class, 'index']);
+    Route::post('/insert', [DeliversController::class, 'insert']);
+    Route::get('/profile/{file_name}', function ($filename) {
+        $path = storage_path('app') . '/profilepictures/' . $filename;
         $image = \File::get($path);
         $mime = \File::mimeType($path);
         return \Response::make($image, 200)->header('Content-Type', $mime);
