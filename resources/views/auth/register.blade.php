@@ -22,17 +22,12 @@
 
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <label for="role"
-                               class="text-md-right">{{ trans('local.role') }}</label>
+                        <label for="phone" class="text-md-right">شماره تماس</label>
 
-                        <select id="role" class="form-control @error('role') is-invalid @enderror"
-                                name="role" required autocomplete="email">
-                            <option value="admin">{{ trans('admin') }}</option>
-                            <option value="blogger">{{ trans('blogger') }}</option>
-                            <option value="{{ old('role') }}">{{ old('role') }}</option>
-                        </select>
-
-                        @error('@role')
+                        <input id="phone" type="text"
+                               class="form-control @error('phone') is-invalid @enderror" name="phone"
+                               value="{{ old('phone') }}" required autocomplete="phone" autofocus>
+                        @error('phone')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

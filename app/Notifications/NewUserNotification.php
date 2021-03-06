@@ -42,8 +42,10 @@ class NewUserNotification extends Notification
     public function toMail($notifiable)
     {
         return [
-            
+            'name' => $this->user->name,
+            'email' => $this->user->email,
         ];
+    }
 
     /**
      * Get the array representation of the notification.

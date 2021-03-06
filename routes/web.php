@@ -5,6 +5,8 @@ use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellersController;
 use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\DeliversController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,6 +40,10 @@ Route::prefix('dashboard/sellers')->group(function () {
 
 Route::prefix('dashboard/customers')->group(function () {
     Route::get('/', [CustomersController::class, 'index']);
+    Route::get('/settings', [CustomersController::class, 'settings']);
+    Route::post('/update-account', [CustomersController::class, 'updateAccount']);
+    Route::post('/update-info', [CustomersController::class, 'updateInfo']);
+    Route::post('/update-password', [CustomersController::class, 'updatePassword']);
     Route::post('/insert', [CustomersController::class, 'insert']);
     Route::get('/profile/{file_name}', function ($filename) {
         $path = storage_path('app') . '/profile/' . $filename;
@@ -57,6 +63,19 @@ Route::get('/dashboard/products/product-image/productImage/{file_name}', functio
     $image = \File::get($path);
     $mime = \File::mimeType($path);
     return \Response::make($image, 200)->header('Content-Type', $mime);
+
+Route::prefix('dashboard/delivers')->group(function () {
+    Route::get('/', [DeliversController::class, 'index']);
+    Route::post('/insert', [DeliversController::class, 'insert']);
+    Route::get('/profile/{file_name}', function ($filename) {
+        $path = storage_path('app') . '/profilepictures/' . $filename;
+        $image = \File::get($path);
+        $mime = \File::mimeType($path);
+        return \Response::make($image, 200)->header('Content-Type', $mime);
+    });
+});
+
+Route::get('dashboard/products', [ProductsController::class, 'listProducts']);
 
 });
 

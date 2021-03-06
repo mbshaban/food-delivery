@@ -16,11 +16,11 @@ class CreateDeliversTable extends Migration
         Schema::create('delivers', function (Blueprint $table) {
             $table->id();
             $table->string('deliver_name');
-            $table->boolean('isMale');
-            $table->string('profile_picture');
-            $table->string('full_address');
-            $table->string('geolocation');
-            $table->string('village');
+            $table->boolean('isMale')->nullable();
+            $table->string('profile_picture')->nullable();
+            $table->string('full_address')->nullable();
+            $table->string('geolocation')->nullable();
+            $table->string('village')->nullable();
             $table->timestamps();
         });
 
