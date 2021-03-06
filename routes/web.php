@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellersController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\DeliversController;
+use App\Http\Controllers\SlidersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,7 +64,16 @@ Route::prefix('dashboard/delivers')->group(function () {
         return \Response::make($image, 200)->header('Content-Type', $mime);
     });
 });
-
+Route::prefix('dashboard/sliders')->group(function () {
+    Route::get('/', [SlidersController::class, 'index']);
+    Route::post('/insert', [SlidersController::class, 'insert']);
+    Route::get('/image/{file_name}', function ($filename) {
+        $path = storage_path('app') . '/sliders/' . $filename;
+        $image = \File::get($path);
+        $mime = \File::mimeType($path);
+        return \Response::make($image, 200)->header('Content-Type', $mime);
+    });
+});
 Route::get('dashboard/products', [ProductsController::class, 'listProducts']);
 
 
