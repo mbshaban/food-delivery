@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Sellers;
 use App\Models\User;
 use App\Models\Districts;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class SellersController extends Controller
@@ -19,7 +20,7 @@ class SellersController extends Controller
     public function insert(Request $request){
 
     	$request->validate([
-		    'email' => 'required|email:rfc,dns',
+		    'email' => 'required|email',
 		    'business_name' => 'required',
 		    'seller_type' => 'required',
 		    'owner_name' => 'required',
@@ -71,5 +72,22 @@ class SellersController extends Controller
 
         return $imgpath;
                 
+    }
+
+    public function edit($id){
+        $districts = Districts::where('provinces_id', 1)->get();
+        $seller = Sellers::where('id', $id)->first();
+        return view('dashboard.sellers.edit', compact('districts', 'seller'));
+    }
+
+    public function delete(Request $request)
+    {
+
+        DB::beginTransaction();
+
+        Sellers::where('id', $request->get('id'))->delete();
+        DB::commit();
+        return "success";
+
     }
 }
