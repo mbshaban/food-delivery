@@ -76,8 +76,74 @@ class SellersController extends Controller
 
     public function edit($id){
         $districts = Districts::where('provinces_id', 1)->get();
-        $seller = Sellers::where('id', $id)->first();
+        $seller = Sellers::where('sellers.id', $id)
+        ->join('districts', 'sellers.district_id', 'districts.id')
+        ->join('users', 'sellers.user_id', 'users.id')
+        ->select('sellers.*', 'districts.district_name', 'users.email', 'users.phone')->first();
         return view('dashboard.sellers.edit', compact('districts', 'seller'));
+    }
+    public function updateAccount(Request $request){
+
+        $request->validate([
+            'user_id' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+
+        ]);
+
+        $user['email'] = $request->get('email');
+        $user['phone'] = $request->get('phone');
+
+        User::where('id', $request->get('user_id'))->update($user);
+
+        return redirect()->back()->with('message', 'Account Successfully Updated');
+
+    }
+
+    public function updateInfo(Request $request){
+
+        $request->validate([
+            'business_name' => 'required',
+            'district_id' => 'required',
+            'logo' => 'mimes:jpeg,png,bmp,jpg|max:20000',
+        ]);
+
+        //update customer
+
+        $data['owner_name'] = $request->get('owner_name');
+        $data['business_name'] = $request->get('business_name');
+        $data['seller_type'] = $request->get('seller_type');
+        $data['full_address'] = $request->get('full_address');
+        $data['geolocation'] = $request->get('geolocation');
+        $data['village'] = $request->get('village');
+        $data['district_id'] = $request->get('district_id');
+        
+        Sellers::where('user_id', $request->get('user_id'))->update($data);
+        return redirect()->back()->with('message', 'Your Info Successfully Updated');
+        
+    }
+
+    public function updatePassword(Request $request){
+
+        $request->validate([
+            'current_password' => 'required|min:6',
+            'password' => 'required|confirmed|min:6',
+
+        ]);
+
+        if (Hash::check($request->get('current_password'), \Auth::user()->password)) {
+            
+                $data['password'] = bcrypt($request->get('password'));
+                $v = User::where('id', Auth::user()->id)->update($data);
+                if ($v) {
+                    return redirect()->back()->with('message', 'Your Password Successfully Updated');
+                }
+            
+        } else {
+            $pfaild = "رمز عبور فعلی شما درست نیست!";
+            return redirect()->back()->with('pfaild', $pfaild);
+        }
+        
     }
 
     public function delete(Request $request)

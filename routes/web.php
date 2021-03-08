@@ -32,6 +32,9 @@ Route::prefix('dashboard/sellers')->group(function () {
     Route::get('/', [SellersController::class, 'index']);
     Route::post('/insert', [SellersController::class, 'insert']);
     Route::get('/edit/{id}', [SellersController::class, 'edit']);
+    Route::post('/update-account', [SellersController::class, 'updateAccount']);
+    Route::post('/update-info', [SellersController::class, 'updateInfo']);
+    Route::post('/update-password', [SellersController::class, 'updatePassword']);
     Route::post('/delete', [SellersController::class, 'delete']);
     Route::get('/logo/{file_name}', function ($filename) {
 	    $path = storage_path('app') . '/logos/' . $filename;
