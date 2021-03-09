@@ -134,7 +134,7 @@ class SellersController extends Controller
         if (Hash::check($request->get('current_password'), \Auth::user()->password)) {
             
                 $data['password'] = bcrypt($request->get('password'));
-                $v = User::where('id', Auth::user()->id)->update($data);
+                $v = User::where('id', $request->get('user_id'))->update($data);
                 if ($v) {
                     return redirect()->back()->with('message', 'Your Password Successfully Updated');
                 }

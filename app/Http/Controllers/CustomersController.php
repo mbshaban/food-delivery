@@ -8,6 +8,7 @@ use App\Models\Districts;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 class CustomersController extends Controller
 {
     /**
@@ -27,11 +28,22 @@ class CustomersController extends Controller
         ->select('customers.*', 'districts.district_name', 'users.phone')->get();
 		return view('dashboard.customers.customers', compact('districts', 'customers'));
 	}
+    //this is for customer
     public function settings(){
         $districts = Districts::where('provinces_id', 1)->get();
         $customer = Customers::where('user_id', Auth::user()->id)->first();
         return view('dashboard.customers.settings', compact('districts', 'customer'));
     }
+    //this is for admin
+    public function edit($id){
+        $districts = Districts::where('provinces_id', 1)->get();
+        $customer = Customers::where('customers.user_id', $id)
+        ->join('districts', 'customers.district_id', 'districts.id')
+        ->join('users', 'customers.user_id', 'users.id')
+        ->select('customers.*', 'districts.district_name', 'users.email', 'users.phone')->first();
+        return view('dashboard.customers.settings', compact('districts', 'customer'));
+    }
+    //both admin and customer use this function
     public function updateAccount(Request $request){
 
     	$request->validate([
@@ -43,12 +55,12 @@ class CustomersController extends Controller
     	$user['email'] = $request->get('email');
     	$user['phone'] = $request->get('phone');
     	
-    	User::where('id', Auth::user()->id)->update($user);
+    	User::where('id', $request->get('user_id'))->update($user);
 
     	return redirect()->back()->with('message', 'Account Successfully Updated');
 
     }
-
+    //both admin and customer use this function
     public function updateInfo(Request $request){
 
         $request->validate([
@@ -69,7 +81,7 @@ class CustomersController extends Controller
             $data['village'] = $request->get('village');
             $data['district_id'] = $request->get('district_id');
             
-            Customers::where('user_id', Auth::user()->id)->update($data);
+            Customers::where('user_id', $request->get('user_id'))->update($data);
             return redirect()->back()->with('message', 'Your Info Successfully Updated');
         }
         else{
@@ -90,7 +102,7 @@ class CustomersController extends Controller
         
         
     }
-
+    //both admin and customer use this function
     public function updatePassword(Request $request){
 
         $request->validate([
@@ -102,7 +114,7 @@ class CustomersController extends Controller
         if (Hash::check($request->get('current_password'), \Auth::user()->password)) {
             
                 $data['password'] = bcrypt($request->get('password'));
-                $v = User::where('id', Auth::user()->id)->update($data);
+                $v = User::where('id', $request->get('user_id'))->update($data);
                 if ($v) {
                     return redirect()->back()->with('message', 'Your Password Successfully Updated');
                 }
@@ -142,5 +154,15 @@ class CustomersController extends Controller
 
         return $imgpath;
                 
+    }
+
+    public function delete(Request $request)
+    {
+
+        DB::beginTransaction();
+        Customers::where('id', $request->get('id'))->delete();
+        DB::commit();
+        return "success";
+
     }
 }
