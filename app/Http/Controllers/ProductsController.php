@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use App\Models\Products;
+use App\Notifications\NewUserNotification;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -40,7 +43,7 @@ class ProductsController extends Controller
 
     public function addProduct(Request $request)
     {
-        Log::info($request->all());
+        $user = null;
         //        if (Auth::user()->role === 'admin' || Auth::user()->role === 'blogger') {
         $v = Validator::make($request->all(),
             [
@@ -71,9 +74,9 @@ class ProductsController extends Controller
             $data['product_image'] = $imagePath;
             $insert = Products::create($data);
             Storage::put('productImage/' . $imagePath, \File::get($image));
-
+            Notification::send($user, new NewUserNotification($request->get('product_title')));
             if ($insert) {
-                return redirect('dashboard/product');
+                return redirect('dashboard/products');
             }
         }
 //        } else {

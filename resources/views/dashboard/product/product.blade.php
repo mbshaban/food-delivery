@@ -22,7 +22,7 @@
                                         <div class="card-text">
                                             <p> محصولات تان را اینجا اضافه نمایید</p>
                                         </div>
-                                        <form method="POST" action="{{url('product')}}"
+                                        <form method="POST" action="{{url('dashboard/products/add-product')}}"
                                               enctype="multipart/form-data">
                                             {{ csrf_field() }}
                                             <div class="form-body">
