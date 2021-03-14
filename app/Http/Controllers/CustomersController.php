@@ -125,24 +125,6 @@ class CustomersController extends Controller
         }
         
     }
-    public function insertSeller($request, $userid, $logo){
-
-    	$seller = new Sellers;
-    	$seller->user_id = $userid;
-    	$seller->business_name = $request->business_name;
-    	$seller->seller_type = $request->seller_type;
-    	$seller->owner_name = $request->owner_name;
-    	$seller->logo = $logo;
-    	$seller->full_address = $request->full_address;
-    	$seller->geolocation = $request->geolocation;
-    	$seller->village = $request->village;
-    	$seller->order_status = 'open';
-    	$seller->district_id = $request->district_id;
-
-    	$seller->save();
-
-    	return redirect()->back()->with('message', 'seller successfully added!');
-    }
 
     public function storeImage($request){
 

@@ -125,7 +125,7 @@
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="col-md-8">
+														<div class="col-md-8 pull-right">
 															<label for="logo">لوگو</label>
 															<input type="file" id="logo" name="logo" class="form-control @error('logo') is-invalid @enderror">
 															@error('logo')
@@ -134,8 +134,8 @@
 						                                    </span>
 						                                    @enderror
 														</div>
-														<div class="col-md-4">
-															
+														<div class="col-md-4 pull-left">
+															<img src="{{url('dashboard/sellers/logo/'.$seller->logo)}}" style="width: 100%;" />
 														</div>
 													</div>
 												</div>

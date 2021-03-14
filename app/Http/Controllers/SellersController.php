@@ -117,7 +117,10 @@ class SellersController extends Controller
         $data['geolocation'] = $request->get('geolocation');
         $data['village'] = $request->get('village');
         $data['district_id'] = $request->get('district_id');
-        
+        if ($request->hasFile('logo')){
+            $imageaddress = $this->storeImage($request);
+            $data['logo'] = $imageaddress;
+        }
         Sellers::where('user_id', $request->get('user_id'))->update($data);
         return redirect()->back()->with('message', 'Your Info Successfully Updated');
         
