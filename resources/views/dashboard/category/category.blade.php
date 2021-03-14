@@ -25,7 +25,7 @@
                                         </div>
                                         <form method="POST" action="{{url('dashboard/category/add-category')}}"
                                               enctype="multipart/form-data">
-                                            {{ csrf_field() }}
+                                            {{ csrf_token() }}
                                             <div class="form-body">
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -135,11 +135,12 @@
                                                         </button>
                                                     </td>
                                                 </tr>
+
                                                 <div id="delete" class="modal fade" role="dialog">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                {{--                                                                <h2 class="modal-title text-right">پنجره تاییدی</h2>--}}
+                                                                <h2 class="modal-title text-right">پنجره تاییدی</h2>
                                                                 <button type="button" class="close text-left "
                                                                         data-dismiss="modal">&times;
                                                                 </button>

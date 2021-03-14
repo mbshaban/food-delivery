@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellersController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\DeliversController;
+use App\Http\Controllers\SlidersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::prefix('dashboard/sellers')->group(function () {
     Route::get('/', [SellersController::class, 'index']);
     Route::post('/insert', [SellersController::class, 'insert']);
+    Route::get('/edit/{id}', [SellersController::class, 'edit']);
+    Route::post('/update-account', [SellersController::class, 'updateAccount']);
+    Route::post('/update-info', [SellersController::class, 'updateInfo']);
+    Route::post('/update-password', [SellersController::class, 'updatePassword']);
+    Route::post('/delete', [SellersController::class, 'delete']);
     Route::get('/logo/{file_name}', function ($filename) {
 	    $path = storage_path('app') . '/logos/' . $filename;
 	    $image = \File::get($path);
@@ -41,9 +47,11 @@ Route::prefix('dashboard/sellers')->group(function () {
 Route::prefix('dashboard/customers')->group(function () {
     Route::get('/', [CustomersController::class, 'index']);
     Route::get('/settings', [CustomersController::class, 'settings']);
+    Route::get('/edit/{id}', [CustomersController::class, 'edit']);
     Route::post('/update-account', [CustomersController::class, 'updateAccount']);
     Route::post('/update-info', [CustomersController::class, 'updateInfo']);
     Route::post('/update-password', [CustomersController::class, 'updatePassword']);
+     Route::post('/delete', [CustomersController::class, 'delete']);
     Route::post('/insert', [CustomersController::class, 'insert']);
     Route::get('/profile/{file_name}', function ($filename) {
         $path = storage_path('app') . '/profile/' . $filename;
@@ -74,7 +82,16 @@ Route::prefix('dashboard/delivers')->group(function () {
         return \Response::make($image, 200)->header('Content-Type', $mime);
     });
 });
-
+Route::prefix('dashboard/sliders')->group(function () {
+    Route::get('/', [SlidersController::class, 'index']);
+    Route::post('/insert', [SlidersController::class, 'insert']);
+    Route::get('/image/{file_name}', function ($filename) {
+        $path = storage_path('app') . '/sliders/' . $filename;
+        $image = \File::get($path);
+        $mime = \File::mimeType($path);
+        return \Response::make($image, 200)->header('Content-Type', $mime);
+    });
+});
 Route::get('dashboard/products', [ProductsController::class, 'listProducts']);
 
 });

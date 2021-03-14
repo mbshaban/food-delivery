@@ -30,6 +30,7 @@
 										<div class="form-group">
 											<label for="email">ایمل</label>
 											<input type="text" id="email" class="form-control  @error('email') is-invalid @enderror" name="email" value="{{auth()->user()->email}}">
+											<input type="hidden" name="user_id" value="{{$customer->user_id}}" />
 											@error('email')
 		                                    <span class="invalid-feedback" role="alert">
 		                                        <strong>{{ $message }}</strong>
@@ -61,6 +62,7 @@
 									<div class="col-md-6">
 										<label for="customer_name">نام</label>
 										<input type="text" id="customer_name" name="customer_name" class="form-control" placeholder="نام" value="@if($customer) {{$customer->customer_name}} @endif">
+										<input type="hidden" name="user_id" value="{{$customer->user_id}}" />
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
@@ -122,6 +124,7 @@
 										<div class="form-group">
 											<label for="current_password">پسورد فعلی</label>
 											<input type="text" id="current_password" name="current_password" class="form-control @error('current_password') is-invalid @enderror" placeholder="پسورد فعلی">
+											<input type="hidden" name="user_id" value="{{$customer->user_id}}" />
 											@if(session()->has('pfaild'))
 						                        <div class="alert alert-danger" style="direction: rtl;">
 						                          <button type="button" class="close" data-dismiss="alert" style="float: left;">&times;</button>
