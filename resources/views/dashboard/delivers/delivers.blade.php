@@ -210,19 +210,43 @@
 									                	</span>
 									                </td>
 									                <td>
-									                	<span class="dropdown">
-									                        <button id="btnSearchDrop4" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-info dropdown-toggle"><i class="fa fa-cog"></i></button>
-									                        <span aria-labelledby="btnSearchDrop4" class="dropdown-menu mt-1 dropdown-menu-right">
-									                            <a href="#" class="dropdown-item"><i class="ft-eye"></i> Open Task</a>
-									                            <a href="#" class="dropdown-item"><i class="ft-edit-2"></i> Edit Task</a>
-									                            <a href="#" class="dropdown-item"><i class="ft-check"></i> Complete Task</a>
-									                            <a href="#" class="dropdown-item"><i class="ft-upload"></i> Assign to</a>
-									                            <div class="dropdown-divider"></div>
-									                            <a href="#" class="dropdown-item"><i class="ft-trash"></i> Delete Task</a>
-									                        </span>
-									                    </span>
+									                	<button title="بروز رسانی"
+                                                                onclick="window.location='{{ url('dashboard/delivers/edit/'.$deliver->id) }}'"
+                                                                class="btn btn-success">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                        <button onclick="" data-toggle="modal" data-target="#delete"
+                                                                title="حذف"
+                                                                class="btn btn-danger">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
 									                </td>
 									            </tr>
+									             <div id="delete" class="modal fade" role="dialog">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h2 class="modal-title text-right">پنجره تاییدی</h2>
+                                                                <button type="button" class="close text-left "
+                                                                        data-dismiss="modal">&times;
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h4 align="center" style="margin: 0">آیا با حذف {{$deliver->deliver_name}} موافق هستید؟</h4>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" data-dismiss="modal"
+                                                                        class="btn btn-warning">لغو
+                                                                </button>
+                                                                <button type="button"
+                                                                        onclick="deleteDeliver({{$deliver->id}})"
+                                                                        class="btn btn-danger">تایید
+                                                                </button>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 									        @empty
 									        @endforelse
 
@@ -242,4 +266,23 @@
         </div>
         <!--end::Entry-->
     </div>
+    <script type="text/javascript">
+        function deleteDeliver(id) {
+        	var headers = {
+	    	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+            $.ajax({
+                url: "delivers/delete",
+                type: "post",
+                headers: headers,
+                data: {'id': id},
+                dataType: "text",
+                success: function (monitordata) {
+                    if (monitordata === "success") {
+                        window.location.href = 'delivers';
+                    }
+                }
+            });
+        }
+    </script>
 @stop
