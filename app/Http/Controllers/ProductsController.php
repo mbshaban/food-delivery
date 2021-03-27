@@ -7,17 +7,24 @@ use App\Models\Products;
 use App\Notifications\NewUserNotification;
 use http\Client\Curl\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use PHPUnit\Exception;
 
 class ProductsController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function listProducts()
     {
+
         //        if (Auth::user()->role === 'admin') {
         $products = Products::select('product_title', 'price', 'discount', 'product_image', 'product_status', 'products.id', 'isApproved',
             'description', 'category_id', 'serller_id', 'categories.category_name', 'sellers.business_name')
@@ -74,7 +81,6 @@ class ProductsController extends Controller
             $data['product_image'] = $imagePath;
             $insert = Products::create($data);
             Storage::put('productImage/' . $imagePath, \File::get($image));
-            Notification::send($user, new NewUserNotification($request->get('product_title')));
             if ($insert) {
                 return redirect('dashboard/products');
             }
@@ -118,6 +124,8 @@ class ProductsController extends Controller
         if ($v->fails()) {
             return redirect()->back()->withErrors($v->errors())->withInput();
         } else {
+            try{
+            DB::beginTransaction();
             $data['product_title'] = $request->get('product_title');
             $data['category_id'] = $request->get('category_id');
             $data['description'] = $request->get('description');
@@ -139,7 +147,12 @@ class ProductsController extends Controller
             } else {
                 Products::where('id', $id)->update($data);
             }
+            DB::commit();
             return redirect('dashboard/products');
+            }catch (Exception $exception){
+                DB::rollBack();
+                return redirect('dashboard/products');
+            }
         }
     }
 }

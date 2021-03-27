@@ -22,7 +22,7 @@ use App\Http\Controllers\SlidersController;
 // -------------- dashboard ----------------
 Route::get('dashboard', function () {
     return view('dashboard.index');
-});
+})->middleware('auth');
 
 Auth::routes();
 
@@ -63,7 +63,7 @@ Route::prefix('dashboard/customers')->group(function () {
 
 Route::get('/dashboard/products', [ProductsController::class, 'listProducts']);
 Route::post('/dashboard/products/add-product', [ProductsController::class, 'addProduct']);
-Route::get('/dashboard/delete-product', [ProductsController::class, 'deleteProduct']);
+Route::post('/dashboard/delete-product', [ProductsController::class, 'deleteProduct']);
 Route::get('/dashboard/product/update-product-view/{id}',[ProductsController::class,'updateProductView']);
 Route::post('/dashboard/products/update-product/{id}',[ProductsController::class,'updateProduct']);
 Route::get('/dashboard/products/product-image/productImage/{file_name}', function ($filename) {
@@ -99,7 +99,7 @@ Route::get('dashboard/products', [ProductsController::class, 'listProducts']);
 //Categories
 Route::get('/dashboard/categories', [CategoriesController::class, 'listCategories']);
 Route::post('/dashboard/category/add-category', [CategoriesController::class, 'addProductCategory']);
-Route::get('/dashboard/delete-category', [CategoriesController::class, 'deleteProductCategory']);
+Route::post('/dashboard/delete-category', [CategoriesController::class, 'deleteProductCategory']);
 Route::get('/dashboard/category/update-category-view/{id}', [CategoriesController::class, 'showUpdateCategoryView']);
 Route::post('/dashboard/category/update-category/{id}', [CategoriesController::class, 'updateCategory']);
 Route::get('/dashboard/category/category-image/categoryImage/{file_name}', function ($filename) {

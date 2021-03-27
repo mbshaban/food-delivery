@@ -180,9 +180,13 @@
     </div>
     <script type="text/javascript">
         function deleteCategory(id) {
+            var headers = {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
             $.ajax({
                 url: "delete-category",
-                type: "GET",
+                type: "POST",
+                headers: headers,
                 data: {'id': id},
                 dataType: "text",
                 success: function (monitordata) {
