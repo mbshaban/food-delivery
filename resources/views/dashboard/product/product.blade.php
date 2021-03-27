@@ -33,7 +33,7 @@
                                                             <input type="text" id="user_id" class="form-control"
                                                                    name="product_title" placeholder="نام محصول">
                                                             <input type="hidden"  class="form-control"
-                                                                   name="seller_id" value="1">
+                                                                   name="user_id" value="{{\Illuminate\Support\Facades\Auth::user()->id}}">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">

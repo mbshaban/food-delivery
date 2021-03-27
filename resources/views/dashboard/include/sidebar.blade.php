@@ -1,7 +1,7 @@
 <div class="main-menu menu-static menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class=" nav-item"><a href="index-2.html"><i class="icon-home"></i><span class="menu-title" data-i18n="nav.dash.main">دشبورد</span><span class="badge badge badge-info badge-pill float-right mr-2">5</span></a>
+            <li class=" nav-item"><a href="index-2.html"><i class="icon-home"></i><span class="menu-title" data-i18n="nav.dash.main">دشبورد</span></a>
                 <ul class="menu-content">
                     <li class="active"><a class="menu-item" href="dashboard-analytics.html" data-i18n="nav.dash.project">سفارش ها</a>
                     </li>
@@ -14,7 +14,7 @@
                 </ul>
             </li>
 
-            
+
             <li class=" nav-item"><a href="#"><i class="icon-user-female"></i><span class="menu-title" data-i18n="nav.templates.main">فروشنده ها</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="{{url('dashboard/sellers')}}" data-i18n="nav.templates.vert.main">لیست</a> </li>

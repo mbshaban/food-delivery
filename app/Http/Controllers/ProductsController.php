@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use App\Models\Products;
+use App\Models\Sellers;
 use App\Notifications\NewUserNotification;
 use http\Client\Curl\User;
 use Illuminate\Http\Request;
@@ -30,6 +31,8 @@ class ProductsController extends Controller
             'description', 'category_id', 'serller_id', 'categories.category_name', 'sellers.business_name')
             ->join('categories', 'categories.id', '=', 'products.category_id')
             ->join('sellers', 'sellers.id', '=', 'products.serller_id')
+            ->join('users', 'users.id', '=', 'sellers.user_id')
+            ->where('users.id','=',Auth::user()->id)
             ->latest('products.created_at')
             ->paginate(5);
         $categories = Categories::select('type', 'category_webaddress', 'category_name', 'category_image', 'category_description', 'id')
@@ -57,7 +60,7 @@ class ProductsController extends Controller
                 'product_title' => 'required|max:250',
                 'category_id' => 'required',
                 'description' => 'required',
-                'seller_id' => 'required',
+                'user_id' => 'required',
                 'price' => 'required|max:250',
                 'discount' => 'required|max:250',
                 'product_status' => 'required|max:250',
@@ -67,13 +70,14 @@ class ProductsController extends Controller
         if ($v->fails()) {
             return redirect()->back()->withErrors($v->errors())->withInput();
         } else {
+            $sellerInfo = Sellers::where('user_id','=',$request->get('user_id'))->first();
             $image = $request->file('product_image');
             Storage::makeDirectory('productImage');
             $imagePath = date("Y-m-d-h-i-sa") . rand(1, 1000) . "." . $image->getClientOriginalExtension();
             $data['product_title'] = $request->get('product_title');
             $data['category_id'] = $request->get('category_id');
             $data['description'] = $request->get('description');
-            $data['serller_id'] = $request->get('seller_id');
+            $data['serller_id'] = $sellerInfo->id;
             $data['price'] = $request->get('price');
             $data['discount'] = $request->get('discount');
             $data['product_status'] = $request->get('product_status');

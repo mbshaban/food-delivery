@@ -9,7 +9,6 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title" id="basic-layout-form">افزودن کتگوری محصولات</h4>
-                                    {{\Illuminate\Support\Facades\Log::info(Auth::user())}}
                                     <a class="heading-elements-toggle"><i
                                             class="fa fa-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -25,7 +24,7 @@
                                         </div>
                                         <form method="POST" action="{{url('dashboard/category/add-category')}}"
                                               enctype="multipart/form-data">
-                                            {{ csrf_token() }}
+                                            {{ csrf_field() }}
                                             <div class="form-body">
                                                 <div class="row">
                                                     <div class="col-md-6">
