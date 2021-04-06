@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\OrderStatusChanged;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,14 @@ use App\Http\Controllers\SlidersController;
 Route::get('dashboard', function () {
     return view('dashboard.index');
 })->middleware('auth');
+Route::get('/fire', function () {
+    return view('test');
+});
+
+Route::get('/sender', function () {
+    event(new OrderStatusChanged());
+
+});
 
 Auth::routes();
 

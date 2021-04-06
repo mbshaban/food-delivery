@@ -29,4 +29,11 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    created() {
+        Echo.channel('my-channel')
+            .listen('OrderStatusChanged', (e) => {
+                console.log(e)
+            });
+    }
 });
+
