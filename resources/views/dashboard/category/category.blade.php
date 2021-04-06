@@ -37,7 +37,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="owner_name">آدرس وب کتگوری</label>
-                                                            <input type="text" id="owner_name" class="form-control"
+                                                            <input type="text" class="form-control"
                                                                    name="category_webaddress"
                                                                    placeholder="کتگوری وب آدرس">
                                                         </div>
@@ -45,7 +45,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="owner_name">کتگوری</label>
-                                                            <input type="text" id="owner_name" class="form-control"
+                                                            <input type="text"  class="form-control"
                                                                    name="category_name" placeholder="کتگوری">
                                                         </div>
                                                     </div>
@@ -92,7 +92,7 @@
                                     <!-- Task List table -->
                                     <div class="table-responsive">
                                         <table id="project-task-list"
-                                               class="table table-bordered w-auto ">
+                                               class="table table-bordered  ">
                                             <thead>
                                             <tr>
                                                 <th> نوعیت کتگوری</th>

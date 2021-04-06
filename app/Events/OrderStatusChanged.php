@@ -37,7 +37,7 @@ class OrderStatusChanged implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('my-channel');
+        return new Channel('order-channel');
     }
 
 }

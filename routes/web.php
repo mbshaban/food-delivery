@@ -2,6 +2,7 @@
 
 use App\Events\OrderStatusChanged;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellersController;
@@ -123,3 +124,8 @@ Route::get('/dashboard/category/category-image/categoryImage/{file_name}', funct
     return \Response::make($image, 200)->header('Content-Type', $mime);
 
 });
+
+//Orders
+Route::get('/dashboard/orders',[OrdersController::class,'listOrders']);
+Route::post('/dashboard/orders/add-order', [OrdersController::class, 'addOrder']);
+

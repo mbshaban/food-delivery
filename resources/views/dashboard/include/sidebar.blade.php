@@ -3,7 +3,7 @@
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class=" nav-item"><a href="index-2.html"><i class="icon-home"></i><span class="menu-title" data-i18n="nav.dash.main">دشبورد</span></a>
                 <ul class="menu-content">
-                    <li class="active"><a class="menu-item" href="dashboard-analytics.html" data-i18n="nav.dash.project">سفارش ها</a>
+                    <li class="active"><a class="menu-item" href="{{url('dashboard/orders')}}" data-i18n="nav.dash.project">سفارش ها</a>
                     </li>
                     <li><a class="menu-item" href="{{url('dashboard/analytics')}}" data-i18n="nav.dash.analytics">تحلیل ها</a>
                     </li>

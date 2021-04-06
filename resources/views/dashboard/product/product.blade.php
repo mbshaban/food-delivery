@@ -33,7 +33,7 @@
                                                             <input type="text" id="user_id" class="form-control"
                                                                    name="product_title" placeholder="نام محصول">
                                                             <input type="hidden"  class="form-control"
-                                                                   name="user_id" value="{{\Illuminate\Support\Facades\Auth::user()->id}}">
+                                                                   name="user_id" value="{{auth()->user()->id}}">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -118,7 +118,7 @@
                                     <!-- Task List table -->
                                     <div class="table-responsive">
                                         <table id="project-task-list"
-                                               class="table table-bordered w-auto ">
+                                               class="table table-bordered  ">
                                             <thead>
                                             <tr>
                                                 <th> نام محصول</th>
