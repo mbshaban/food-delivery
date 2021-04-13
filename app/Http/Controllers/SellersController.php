@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Sellers;
 use App\Models\User;
 use App\Models\Districts;
+use App\Models\Categories;
+use App\Models\Products;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 class SellersController extends Controller
 {
 	public function index(){
@@ -16,7 +19,112 @@ class SellersController extends Controller
         $sellers = Sellers::all();
 		return view('dashboard.sellers.sellers', compact('districts', 'sellers'));
 	}
+    public function register(){
+        $districts = Districts::where('provinces_id', 1)->get();
+        return view('sellers.register', compact('districts'));
+    }
+    public function orders(){
+        $districts = Districts::where('provinces_id', 1)->get();
+        return view('sellers.orders', compact('districts'));
+    }
+    public function products(){
+        $products = Products::join('categories', 'categories.id', '=', 'products.category_id')
+            ->join('sellers', 'sellers.id', '=', 'products.serller_id')->where('sellers.user_id', Auth::user()->id)
+            ->select('products.*', 'categories.category_name', 'sellers.business_name')
+            ->latest('products.created_at')
+            ->paginate(12);
+        $categories = Categories::select('type', 'category_webaddress', 'category_name', 'category_image', 'category_description', 'id')
+            ->latest('categories.created_at')
+            ->get();
+        return view('sellers.products', compact('products', 'categories'));
+    }
+    public function insertProduct(Request $request){
+        $seller = Sellers::where('user_id', Auth::user()->id)->first();
+        $request->validate([
+        'product_title' => 'required|max:250',
+            'category_id' => 'required',
+            'description' => 'required',
+            'seller_id' => 'required',
+            'price' => 'required|max:250',
+            'discount' => 'required|max:250',
+            'product_status' => 'required|max:250',
+            'isApproved' => 'required|max:250',
+            'product_image' => 'required|mimes:jpeg,png,bmp,jpg|max:20000'
+        ]);
+        $image = $request->file('product_image');
+        Storage::makeDirectory('productImage');
+        $imagePath = date("Y-m-d-h-i-sa") . rand(1, 1000) . "." . $image->getClientOriginalExtension();
+        $data['product_title'] = $request->get('product_title');
+        $data['category_id'] = $request->get('category_id');
+        $data['description'] = $request->get('description');
+        $data['serller_id'] = $seller->id;
+        $data['price'] = $request->get('price');
+        $data['discount'] = $request->get('discount');
+        $data['product_status'] = $request->get('product_status');
+        $data['isApproved'] = $request->get('isApproved');
+        $data['product_image'] = $imagePath;
+        $insert = Products::create($data);
+        Storage::put('productImage/' . $imagePath, \File::get($image));
 
+        if ($insert) {
+             return redirect()->back()->with('message', 'Product Successfully Added');
+        }
+
+    }
+
+    public function editProduct($id)
+    {
+        $data = Products::where('id', $id)->first();
+        $categories = Categories::select('type', 'category_webaddress', 'category_name', 'category_image', 'category_description', 'id')
+            ->latest('categories.created_at')
+            ->get();
+        return view('sellers.products.edit', compact('data', 'categories'));
+    }
+
+    public function updateProduct(Request $request, $id)
+    {
+        $request->validate([
+            'product_title' => 'required|max:250',
+            'category_id' => 'required',
+            'description' => 'required',
+            'price' => 'required|max:250',
+            'discount' => 'required|max:250',
+            'product_status' => 'required|max:250',
+            'isApproved' => 'required|max:250',
+            'product_image' => 'mimes:jpeg,png,bmp,jpg|max:20000'
+        ]);
+        $data['product_title'] = $request->get('product_title');
+        $data['category_id'] = $request->get('category_id');
+        $data['description'] = $request->get('description');
+        $data['price'] = $request->get('price');
+        $data['discount'] = $request->get('discount');
+        $data['product_status'] = $request->get('product_status');
+        $data['isApproved'] = $request->get('isApproved');
+        if ($request->hasFile('product_image')) {
+            $image = $request->file('product_image');
+            Storage::makeDirectory('productImage');
+            $imagePath = date("Y-m-d-h-i-sa") . rand(1, 1000) . "." . $image->getClientOriginalExtension();
+            $data['product_image'] = $imagePath;
+            $update = Products::where('id', $id)->update($data);
+            if ($update) {
+                Storage::put('productImage/' . $imagePath, \File::get($image));
+                Storage::delete('productImage/' . $request->get('prev_image_path'));
+            }
+        } else {
+            Products::where('id', $id)->update($data);
+        }
+        return redirect('sellers/products'); 
+    }
+
+    public function deleteProduct(Request $request){
+
+        DB::beginTransaction();
+
+        Products::where('id', $request->get('id'))->delete();
+        DB::commit();
+        return "success";
+
+    }
     public function insert(Request $request){
 
     	$request->validate([

@@ -18,7 +18,10 @@ use App\Http\Controllers\SlidersController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// -------------- dashboard ----------------
+Route::get('/', function () {
+    return view('welcome');
+});
 // -------------- dashboard ----------------
 Route::get('dashboard', function () {
     return view('dashboard.index');
@@ -73,6 +76,29 @@ Route::get('/dashboard/products/product-image/productImage/{file_name}', functio
     return \Response::make($image, 200)->header('Content-Type', $mime);
 });
 
+Route::prefix('sellers')->group(function () {
+    Route::get('/', [SellersController::class, 'index']);
+    Route::get('/register', [SellersController::class, 'register']);
+    Route::get('/orders', [SellersController::class, 'orders']);
+    Route::get('/products', [SellersController::class, 'products']);
+    Route::post('/products/insert', [SellersController::class, 'insertProduct']);
+    Route::post('/products/delete', [SellersController::class, 'deleteProduct']);
+    Route::get('/products/edit/{id}', [SellersController::class, 'editProduct']);
+    Route::post('/products/update/{id}', [SellersController::class, 'updateProduct']);
+    Route::post('/insert', [SellersController::class, 'insert']);
+    Route::get('/edit/{id}', [SellersController::class, 'edit']);
+    Route::post('/update-account', [SellersController::class, 'updateAccount']);
+    Route::post('/update-info', [SellersController::class, 'updateInfo']);
+    Route::post('/update-password', [SellersController::class, 'updatePassword']);
+    Route::post('/delete', [SellersController::class, 'delete']);
+    Route::get('/logo/{file_name}', function ($filename) {
+        $path = storage_path('app') . '/logos/' . $filename;
+        $image = \File::get($path);
+        $mime = \File::mimeType($path);
+        return \Response::make($image, 200)->header('Content-Type', $mime);
+    });
+});
+
 Route::prefix('dashboard/delivers')->group(function () {
     Route::get('/', [DeliversController::class, 'index']);
     Route::post('/insert', [DeliversController::class, 'insert']);
@@ -112,5 +138,4 @@ Route::get('/dashboard/category/category-image/categoryImage/{file_name}', funct
     $image = \File::get($path);
     $mime = \File::mimeType($path);
     return \Response::make($image, 200)->header('Content-Type', $mime);
-
 });
