@@ -23,6 +23,7 @@ class CreateNotificationsTable extends Migration
         });
         Schema::table('notifications', function(Blueprint $table){
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('order_id')->constrained('orders')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

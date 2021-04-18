@@ -57,17 +57,29 @@
         },
         mounted() {
             console.log('notification mounted');
-            Echo.channel('pizza-tracker')
+            Echo.channel('order-channel')
                 .listen('OrderStatusChanged', (order) => {
-                    if (this.user_id == order.user_id) {
+                    // if (this.user_id == order.user_id) {
 
                         this.notifications.unshift({
                             description: 'Order ID:' + order.id + "updated",
                             url: '/orders/' + order.id,
                             time: new Date() + ''
                         });
-                    }
+                    // }
+                    console.log(this.notifications);
                 });
+        },
+        methods: {
+            async create() {
+                console.log('helllooooooooo');
+                await this.axios.post('http://localhost:8000/api/notifications', this.notifications).then(response => {
+                    console.log('well done')
+                }).catch(error => {
+                    console.log(error);
+                })
+            }
         }
+
     }
 </script>

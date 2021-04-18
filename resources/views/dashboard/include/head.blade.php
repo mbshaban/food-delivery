@@ -1,9 +1,5 @@
 <head>
-
     <meta charset="utf-8"/>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script src="{{ asset('js/app.js') }}"></script>
-
     <title>Metronic Live preview | Keenthemes</title>
     <meta name="description" content="Updates and statistics"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>

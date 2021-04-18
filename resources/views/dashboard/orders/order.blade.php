@@ -16,6 +16,7 @@
                                             <li><a data-action="collapse"><i class="ft-plus"></i></a></li>
                                         </ul>
                                     </div>
+                                    <order-notification {{auth()->user()->id}}></order-notification>
                                 </div>
                                 <div class="card-content collapse">
                                     <div class="card-body">

@@ -24,10 +24,10 @@ class OrderStatusChanged implements ShouldBroadcast
      */
     public $order;
 
-    public function __construct()
+    public function __construct(Orders $order)
     {
         //
-        $this->order = "hello";
+        $this->order = $order;
     }
 
     /**

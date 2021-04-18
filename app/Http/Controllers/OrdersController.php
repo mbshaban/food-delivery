@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderStatusChanged;
 use App\Models\Orders;
 use App\Models\Sellers;
 use Illuminate\Http\Request;
@@ -37,7 +38,9 @@ class OrdersController extends Controller
             $data['seller_id'] = $request->get('seller_id');
             $data['customer_id'] = $request->get('customer_id');
             $data['order_status'] = $request->get('order_status');
+            $data['deliver_id'] = null;
             $insert = Orders::create($data);
+            event(new OrderStatusChanged($insert));
 
             if ($insert) {
                 return redirect('dashboard/orders');

@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('account_type')->default('customer');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->date('date_of_birth')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
