@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,12 +17,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-Route::middleware('api')->group(function () {
-    Route::resource('notification',NotificationController::class);
-});
-Route::post('/register',[AuthController::class,'register']);
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
+Route::post('/register-user', [AuthController::class, 'register']);
+Route::post('/check-user', [AuthController::class, 'checkUser']);
+Route::get('/get-user', [AuthController::class, 'getUser']);
+Route::post('/add-user-details', [AuthController::class, 'addUserDetails']);
+
+//Route::group([
+//    'middleware' => 'api',
+//    'prefix' => 'auth'
+//
+//], function ($router) {
+//    Route::post('/register-user', [AuthController::class, 'register']);
+//    Route::get('/get-user', [AuthController::class, 'getUser']);
+//    Route::post('/add-user-details', [AuthController::class, 'addUserDetails']);
+//});
 
