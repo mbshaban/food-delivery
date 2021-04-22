@@ -39,12 +39,11 @@ class AuthController extends Controller
                 $user->phone = $request['phone'];
                 $user->account_type = 'customer';
                 $user->password = bcrypt($request['password']);
+//                $user->password = $request['password'];
                 $user->save();
-
                 $customer = new Customers();
                 $customer->user_id = $user->id;
                 $customer->save();
-
                 $token = auth()->login($user);
                 DB::commit();
                 return $this->respondWithToken($token, $user->id);
@@ -67,6 +66,56 @@ class AuthController extends Controller
             return response()->json(['isExist' => true]);
         } else {
             return response()->json(['isExist' => false]);
+        }
+
+    }
+
+    public function login(Request $request)
+    {
+        Log::info($request->all());
+//        $validator = Validator::make($request->all(), [
+//            'phone' => 'required|string|between:10,10',
+//            'password' => 'required|string|min:6',
+//        ]);
+//
+//        if ($validator->fails()) {
+//            return response()->json($validator->errors(), 422);
+//        }
+        $user = User::where('phone', $request['phone'])->first();
+        if (!$token = auth()->attempt($request->all())) {
+            return response()->json([
+                'error' => 'unauthorized'
+            ], 401);
+        }
+        return $this->respondWithToken($token, $user->id);
+
+    }
+
+    public function updatePassword(Request $request)
+    {
+        Log::info($request->all());
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required|string|between:10,10',
+            'password' => 'required|string|min:6',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+        try {
+            DB::beginTransaction();
+            $data['password'] = bcrypt($request['password']);
+//            $data['password'] = $request['password'];
+            $update = User::where('phone', $request['phone'])->update($data);
+            $user = User::where('phone', $request['phone'])->first();
+            $token = auth()->login($user);
+            DB::commit();
+            return $this->respondWithToken($token, $user->id);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return response()->json([
+                'error' => $exception->getMessage()
+            ], 500);
         }
 
     }

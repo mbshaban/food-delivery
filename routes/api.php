@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\MobileHomePageController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,19 +21,14 @@ use Illuminate\Support\Facades\Route;
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
-
+// َ User
 Route::post('/register-user', [AuthController::class, 'register']);
 Route::post('/check-user', [AuthController::class, 'checkUser']);
+Route::post('/login-user', [AuthController::class, 'login']);
+Route::post('/forgot-password', [AuthController::class, 'updatePassword']);
 Route::get('/get-user', [AuthController::class, 'getUser']);
 Route::post('/add-user-details', [AuthController::class, 'addUserDetails']);
 
-//Route::group([
-//    'middleware' => 'api',
-//    'prefix' => 'auth'
-//
-//], function ($router) {
-//    Route::post('/register-user', [AuthController::class, 'register']);
-//    Route::get('/get-user', [AuthController::class, 'getUser']);
-//    Route::post('/add-user-details', [AuthController::class, 'addUserDetails']);
-//});
 
+//Home
+Route::get('/get-home-data', [MobileHomePageController::class, 'getHomeData']);
