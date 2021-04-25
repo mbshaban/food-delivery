@@ -2,6 +2,7 @@
 
 use App\Events\OrderStatusChanged;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
@@ -47,11 +48,11 @@ Route::prefix('dashboard/sellers')->group(function () {
     Route::post('/update-password', [SellersController::class, 'updatePassword']);
     Route::post('/delete', [SellersController::class, 'delete']);
     Route::get('/logo/{file_name}', function ($filename) {
-	    $path = storage_path('app') . '/logos/' . $filename;
-	    $image = \File::get($path);
-	    $mime = \File::mimeType($path);
-	    return \Response::make($image, 200)->header('Content-Type', $mime);
-	});
+        $path = storage_path('app') . '/logos/' . $filename;
+        $image = \File::get($path);
+        $mime = \File::mimeType($path);
+        return \Response::make($image, 200)->header('Content-Type', $mime);
+    });
 });
 
 Route::prefix('dashboard/customers')->group(function () {
@@ -74,8 +75,8 @@ Route::prefix('dashboard/customers')->group(function () {
 Route::get('/dashboard/products', [ProductsController::class, 'listProducts']);
 Route::post('/dashboard/products/add-product', [ProductsController::class, 'addProduct']);
 Route::post('/dashboard/delete-product', [ProductsController::class, 'deleteProduct']);
-Route::get('/dashboard/product/update-product-view/{id}',[ProductsController::class,'updateProductView']);
-Route::post('/dashboard/products/update-product/{id}',[ProductsController::class,'updateProduct']);
+Route::get('/dashboard/product/update-product-view/{id}', [ProductsController::class, 'updateProductView']);
+Route::post('/dashboard/products/update-product/{id}', [ProductsController::class, 'updateProduct']);
 Route::get('/dashboard/products/product-image/productImage/{file_name}', function ($filename) {
     $path = storage_path('app') . '/productImage/' . $filename;
     $image = \File::get($path);
@@ -125,7 +126,7 @@ Route::get('/dashboard/category/category-image/categoryImage/{file_name}', funct
 });
 
 //Orders
-Route::get('/dashboard/orders',[OrdersController::class,'listOrders']);
+Route::get('/dashboard/orders', [OrdersController::class, 'listOrders']);
 Route::post('/dashboard/orders/add-order', [OrdersController::class, 'addOrder']);
 
 //Discounts
@@ -135,7 +136,8 @@ Route::get('dashboard/discounts', function () {
 });
 
 //Menu
-Route::get('dashboard/menu', function () {
-    return view('dashboard.menu.menu');
-});
-
+Route::get('/dashboard/menu', [MenuController::class, 'listMenu']);
+Route::post('/dashboard/menu/add-menu', [MenuController::class, 'addMenu']);
+Route::get('/dashboard/menu/update-menu-view/{id}',[MenuController::class,'showUpdateMenuView']);
+Route::post('/dashboard/menu/update-menu/{id}',[MenuController::class,'updateMenu']);
+Route::post('/dashboard/delete-menu',[MenuController::class,'deleteMenu']);

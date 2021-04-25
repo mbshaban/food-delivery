@@ -9,10 +9,13 @@
                     </li>
                     <li><a class="menu-item" href="{{url('dashboard/analytics')}}" data-i18n="nav.dash.analytics">تحلیل ها</a>
                     </li>
-                    <li><a class="menu-item" href="{{url('dashboard/products')}}" data-i18n="nav.templates.vert.main">محصولات</a>
-                    </li>
+
                     </li>
                     <li><a class="menu-item" href="{{url('dashboard/categories')}}" data-i18n="nav.dash.crm">کتگوری ها</a>
+                    </li>
+                    <li><a class="menu-item" href="{{url('dashboard/menu')}}" data-i18n="nav.templates.vert.main">مینوها</a>
+                    </li>
+                    <li><a class="menu-item" href="{{url('dashboard/products')}}" data-i18n="nav.templates.vert.main">محصولات</a>
                     </li>
                     <li><a class="menu-item" href="{{url('dashboard/discounts')}}" data-i18n="nav.dash.crm">تخفیفات</a>
                     </li>

@@ -20,9 +20,10 @@ class MobileHomePageController extends Controller
         }
         $categories = Categories::select()->get();
         for ($i = 0; $i < count($categories); $i++) {
-            $categories[$i]->category_image = "http://192.168.137.64:8000/api/image-file/categories/" . $slider[$i]->slider_image;
+            $categories[$i]->category_image = "http://192.168.137.64:8000/api/image-file/categories/" . $categories[$i]->category_image;
         }
-        $sellers = Sellers::select('id', 'business_name', 'seller_type', 'full_address', 'village', 'order_status')->get();
+        $sellers = Sellers::select('id', 'business_name', 'seller_type', 'full_address', 'village',
+            'status_id', 'isNew', 'isFavourite', 'delivery_time', 'review')->get();
 
         for ($i = 0; $i < count($sellers); $i++) {
             $sellers[$i]['discount'] = 10;

@@ -22,7 +22,7 @@
                                         <div class="card-text">
                                             <p>مینوی غذایی خودرا اینجا وارد کنید</p>
                                         </div>
-                                        <form method="POST" action="{{url('dashboard/category/add-category')}}"
+                                        <form method="POST" action="{{url('dashboard/menu/add-menu')}}"
                                               enctype="multipart/form-data">
                                             {{ csrf_field() }}
                                             <div class="form-body">
@@ -42,95 +42,94 @@
                                                     لغو
                                                 </button>
                                             </div>
+                                        </form>
                                     </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-
-            </div>
-            </section>
-            <section class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">لیست کتگوری</h4>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-body">
-                                <!-- Task List table -->
-                                <div class="table-responsive">
-                                    <table id="project-task-list"
-                                           class="table table-bordered  ">
-                                        <thead>
-                                        <tr>
-                                            <th>مینو</th>
-                                            <th>بروز رسان</th>
-                                            <th>حذف</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($menus as $menu)
+                </section>
+                <section class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">لیست کتگوری</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <!-- Task List table -->
+                                    <div class="table-responsive">
+                                        <table id="project-task-list"
+                                               class="table table-bordered  ">
+                                            <thead>
                                             <tr>
-                                                <td>{{$menu->title}}</td>
-                                                <td>
-                                                    <button title="بروز رسانی"
-                                                            onclick="window.location='{{ url('dashboard/menu/update-menu-view/'.$category->id) }}'"
-                                                            class="btn btn-success">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                </td>
-                                                <td>
-                                                    <button onclick="" data-toggle="modal" data-target="#delete"
-                                                            title="حذف"
-                                                            class="btn btn-danger">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
+                                                <th>مینو</th>
+                                                <th>بروز رسان</th>
+                                                <th>حذف</th>
                                             </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($menus as $menu)
+                                                <tr>
+                                                    <td>{{$menu->title}}</td>
+                                                    <td>
+                                                        <button title="بروز رسانی"
+                                                                onclick="window.location='{{ url('dashboard/menu/update-menu-view/'.$menu->id) }}'"
+                                                                class="btn btn-success">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button onclick="" data-toggle="modal" data-target="#delete"
+                                                                title="حذف"
+                                                                class="btn btn-danger">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
 
-                                            <div id="delete" class="modal fade" role="dialog">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h2 class="modal-title text-right">پنجره تاییدی</h2>
-                                                            <button type="button" class="close text-left "
-                                                                    data-dismiss="modal">&times;
-                                                            </button>
+                                                <div id="delete" class="modal fade" role="dialog">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h2 class="modal-title text-right">پنجره تاییدی</h2>
+                                                                <button type="button" class="close text-left "
+                                                                        data-dismiss="modal">&times;
+                                                                </button>
 
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <h4 align="center" style="margin: 0"> مطمین هستید که می
-                                                                خواهید این اطلاعات را حذف کنید؟</h4>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" data-dismiss="modal"
-                                                                    class="btn btn-warning">لغو
-                                                            </button>
-                                                            <button type="button"
-                                                                    onclick="deleteCategory({{$menu->id}})"
-                                                                    class="btn btn-danger">تایید
-                                                            </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h4 align="center" style="margin: 0"> مطمین هستید که می
+                                                                    خواهید این اطلاعات را حذف کنید؟</h4>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" data-dismiss="modal"
+                                                                        class="btn btn-warning">لغو
+                                                                </button>
+                                                                <button type="button"
+                                                                        onclick="deleteCategory({{$menu->id}})"
+                                                                        class="btn btn-danger">تایید
+                                                                </button>
 
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                    <div class="mt-4 mr-4">
-                                        {{$categories->links()}}
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                        <div class="mt-4 mr-4">
+                                            {{$menus->links()}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </div>
-    </div>
     </div>
     <script type="text/javascript">
         function deleteCategory(id) {

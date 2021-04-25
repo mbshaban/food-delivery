@@ -22,12 +22,12 @@ class CreateSellersTable extends Migration
             $table->string('full_address');
             $table->text('geolocation')->nullable();
             $table->string('village')->nullable();
-            $table->string('order_status')->nullable();
             $table->timestamps();
         });
         Schema::table('sellers', function(Blueprint $table){
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('district_id')->constrained('districts')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('status_id')->constrained('seller_status')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

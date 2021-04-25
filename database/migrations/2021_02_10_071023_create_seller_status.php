@@ -15,6 +15,8 @@ class CreateSellerStatus extends Migration
     {
         Schema::create('seller_status', function (Blueprint $table) {
             $table->id();
+            $table->string('text');
+            $table->string('slug');
             $table->timestamps();
         });
     }

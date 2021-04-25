@@ -39,8 +39,8 @@ class SellersController extends Controller
     	$user->save();
     	$imageaddress = $this->storeImage($request);
     	return $this->insertSeller($request, $user->id, $imageaddress);
-    
-    	
+
+
     }
 
     public function insertSeller($request, $userid, $logo){
@@ -54,7 +54,7 @@ class SellersController extends Controller
     	$seller->full_address = $request->full_address;
     	$seller->geolocation = $request->geolocation;
     	$seller->village = $request->village;
-    	$seller->order_status = 'open';
+    	$seller->status_id = 1;
     	$seller->district_id = $request->district_id;
 
     	$seller->save();
@@ -71,7 +71,7 @@ class SellersController extends Controller
         Storage::put('logos/'.$imgpath, \File::get($image));
 
         return $imgpath;
-                
+
     }
 
     public function edit($id){
@@ -123,7 +123,7 @@ class SellersController extends Controller
         }
         Sellers::where('user_id', $request->get('user_id'))->update($data);
         return redirect()->back()->with('message', 'Your Info Successfully Updated');
-        
+
     }
 
     public function updatePassword(Request $request){
@@ -135,18 +135,18 @@ class SellersController extends Controller
         ]);
 
         if (Hash::check($request->get('current_password'), \Auth::user()->password)) {
-            
+
                 $data['password'] = bcrypt($request->get('password'));
                 $v = User::where('id', $request->get('user_id'))->update($data);
                 if ($v) {
                     return redirect()->back()->with('message', 'Your Password Successfully Updated');
                 }
-            
+
         } else {
             $pfaild = "رمز عبور فعلی شما درست نیست!";
             return redirect()->back()->with('pfaild', $pfaild);
         }
-        
+
     }
 
     public function delete(Request $request)
