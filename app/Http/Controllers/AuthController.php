@@ -130,12 +130,6 @@ class AuthController extends Controller
         ]);
     }
 
-    public function getUser()
-    {
-        Log::info('hello');
-        return response()->json(['text' => 'hello']);
-    }
-
     protected function respondWithToken($token, $userId)
     {
         return response()->json([

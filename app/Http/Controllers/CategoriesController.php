@@ -23,11 +23,8 @@ class CategoriesController extends Controller
 //        if (Auth::user()->role === 'admin' || Auth::user()->role === 'blogger') {
         $v = Validator::make($request->all(),
             [
-                'type' => 'required|max:250',
-                'category_webaddress' => 'required|max:250',
-                'category_name' => 'required|max:250',
+                'title' => 'required|max:250',
                 'category_image' => 'mimes:jpeg,png,bmp,jpg|max:20000',
-                'category_description' => 'required'
             ]);
         if ($v->fails()) {
             return redirect()->back()->withErrors($v->errors())->withInput();
@@ -35,10 +32,7 @@ class CategoriesController extends Controller
             $image = $request->file('category_image');
             Storage::makeDirectory('categoryImage');
             $imagePath = date("Y-m-d-h-i-sa") . rand(1, 1000) . "." . $image->getClientOriginalExtension();
-            $data['type'] = $request->get('type');
-            $data['category_webaddress'] = $request->get('category_webaddress');
-            $data['category_name'] = $request->get('category_name');
-            $data['category_description'] = $request->get('category_description');
+            $data['title'] = $request->get('title');
             $data['category_image'] = $imagePath;
             $insert = Categories::create($data);
             Storage::put('categoryImage/' . $imagePath, \File::get($image));
@@ -55,7 +49,7 @@ class CategoriesController extends Controller
     public function listCategories()
     {
 //        if (Auth::user()->role === 'admin') {
-        $categories = Categories::select('type', 'category_webaddress', 'category_name', 'category_image', 'category_description', 'id')
+        $categories = Categories::select('title', 'category_image', 'id')
             ->latest('categories.created_at')
             ->paginate(5);
         return view('dashboard.category.category', compact('categories'));
@@ -117,19 +111,13 @@ class CategoriesController extends Controller
 
         $v = Validator::make($request->all(),
             [
-                'type' => 'required|max:250',
-                'category_webaddress' => 'required|max:250',
-                'category_name' => 'required|max:250',
+                'title' => 'required|max:250',
                 'category_image' => 'mimes:jpeg,png,bmp,jpg|max:20000',
-                'category_description' => 'required'
             ]);
         if ($v->fails()) {
             return redirect()->back()->withErrors($v->errors())->withInput();
         } else {
-            $data['type'] = $request->get('type');
-            $data['category_webaddress'] = $request->get('category_webaddress');
-            $data['category_name'] = $request->get('category_name');
-            $data['category_description'] = $request->get('category_description');
+            $data['title'] = $request->get('title');
             if ($request->hasFile('category_image')) {
                 $image = $request->file('category_image');
                 Storage::makeDirectory('categoryImage');

@@ -26,9 +26,20 @@ Route::post('/register-user', [AuthController::class, 'register']);
 Route::post('/check-user', [AuthController::class, 'checkUser']);
 Route::post('/login-user', [AuthController::class, 'login']);
 Route::post('/forgot-password', [AuthController::class, 'updatePassword']);
-Route::get('/get-user', [AuthController::class, 'getUser']);
 Route::post('/add-user-details', [AuthController::class, 'addUserDetails']);
 
 
 //Home
 Route::get('/get-home-data', [MobileHomePageController::class, 'getHomeData']);
+Route::get('/image-file/sliders/{file_name}', function ($filename) {
+    $path = storage_path('app') . '/sliders/' . $filename;
+    $image = \File::get($path);
+    $mime = \File::mimeType($path);
+    return \Response::make($image, 200)->header('Content-Type', $mime);
+});
+Route::get('/image-file/categories/{file_name}', function ($filename) {
+    $path = storage_path('app') . '/categoryImage/' . $filename;
+    $image = \File::get($path);
+    $mime = \File::mimeType($path);
+    return \Response::make($image, 200)->header('Content-Type', $mime);
+});

@@ -109,7 +109,6 @@ Route::prefix('dashboard/sliders')->group(function () {
     });
 });
 
-Route::get('dashboard/products', [ProductsController::class, 'listProducts']);
 
 //Categories
 Route::get('/dashboard/categories', [CategoriesController::class, 'listCategories']);
@@ -128,4 +127,15 @@ Route::get('/dashboard/category/category-image/categoryImage/{file_name}', funct
 //Orders
 Route::get('/dashboard/orders',[OrdersController::class,'listOrders']);
 Route::post('/dashboard/orders/add-order', [OrdersController::class, 'addOrder']);
+
+//Discounts
+
+Route::get('dashboard/discounts', function () {
+    return view('dashboard.discounts.discount-product');
+});
+
+//Menu
+Route::get('dashboard/menu', function () {
+    return view('dashboard.menu.menu');
+});
 

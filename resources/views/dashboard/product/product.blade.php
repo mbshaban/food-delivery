@@ -40,10 +40,10 @@
                                                         <div class="form-group">
                                                             <label for="owner_name"> کتگوری</label>
                                                             <select class="form-control"
-                                                                    name="category_id" id="lang">
-                                                                @foreach($categories as $category)
+                                                                    name="menu_id" id="lang">
+                                                                @foreach($menus as $menu)
                                                                     <option
-                                                                        value="{{$category->id}}">{{$category->category_name}}</option>
+                                                                        value="{{$menu->id}}">{{$menu->title}}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -53,13 +53,6 @@
                                                             <label for="owner_name">قیمت</label>
                                                             <input type="text" id="owner_name" class="form-control"
                                                                    name="price" placeholder="قیمت">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="owner_name">تخفیف</label>
-                                                            <input type="text" id="owner_name" class="form-control"
-                                                                   name="discount" placeholder="تخفیف">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -125,7 +118,6 @@
                                                 <th>کتگوری</th>
                                                 <th>فروشنده</th>
                                                 <th>قیمت</th>
-                                                <th>تخفیف</th>
                                                 <th>حالت موجودیت</th>
                                                 <th>حالت قبولی</th>
                                                 <th>توضیجات</th>
@@ -138,10 +130,9 @@
                                             @foreach($products as $product)
                                                 <tr>
                                                     <td>{{$product->product_title}}</td>
-                                                    <td>{{$product->category_name}}</td>
+                                                    <td>{{$product->title}}</td>
                                                     <td>{{$product->business_name}}</td>
                                                     <td>{{$product->price}}</td>
-                                                    <td>{{$product->discount}}</td>
                                                     <td>{{$product->product_status}}</td>
                                                     <td>{{$product->isApproved}}</td>
                                                     <td class="table-text-wrap">

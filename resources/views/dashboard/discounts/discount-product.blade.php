@@ -8,7 +8,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form">افزودن کتگوری محصولات</h4>
+                                    <h4 class="card-title" id="basic-layout-form">افزودن محصولات</h4>
                                     <a class="heading-elements-toggle"><i
                                             class="fa fa-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -20,28 +20,18 @@
                                 <div class="card-content collapse">
                                     <div class="card-body">
                                         <div class="card-text">
-                                            <p>کتگوری محصولات تان را اینجا اضافه نمایید</p>
+                                            <p> محصولات تان را اینجا اضافه نمایید</p>
                                         </div>
-                                        <form method="POST" action="{{url('dashboard/category/add-category')}}"
+                                        <form method="POST" action="{{url('dashboard/products/add-product')}}"
                                               enctype="multipart/form-data">
                                             {{ csrf_field() }}
                                             <div class="form-body">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="owner_name">کتگوری</label>
-                                                            <input type="text"  class="form-control"
-                                                                   name="title" placeholder="کتگوری">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>تصویر کتگوری</label>
-                                                            <input type="file"
-                                                                   class="form-control"
-                                                                   name="category_image">
-                                                        </div>
-                                                    </div>
+
+                                                <div class="form-group">
+                                                    <label for="geolocation">توضیحات محصول</label>
+                                                    <textarea id="geolocation" rows="5" class="form-control"
+                                                              name="description"
+                                                              placeholder="توضیحات محصول"></textarea>
                                                 </div>
                                                 <div class="form-actions">
                                                     <button type="submit" class="btn btn-primary">
@@ -64,7 +54,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">لیست کتگوری</h4>
+                                <h4 class="card-title">لیست محصولات</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
@@ -74,47 +64,40 @@
                                                class="table table-bordered  ">
                                             <thead>
                                             <tr>
-                                                <th>نام کتگوری</th>
-                                                <th>تصویر کتگوری</th>
+                                                <th> نام محصول</th>
+                                                <th>کتگوری</th>
                                                 <th>بروز رسان</th>
                                                 <th>حذف</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($categories as $category)
-                                                <tr>
-                                                    <td>{{$category->title}}</td>
-                                                    <td class="text-center">
-                                                        <img
-                                                            src="{{url('dashboard/category/category-image/categoryImage/'.$category->category_image)}}"
-                                                            alt="avatar" data-placement="right"
-                                                            title="Nicole Barrett" style="height: 200px">
-                                                    </td>
-                                                    <td>
-                                                        <button title="بروز رسانی"
-                                                                onclick="window.location='{{ url('dashboard/category/update-category-view/'.$category->id) }}'"
-                                                                class="btn btn-success">
-                                                            <i class="fa fa-edit"></i>
-                                                        </button>
-                                                    </td>
-                                                    <td>
-                                                        <button onclick="" data-toggle="modal" data-target="#delete"
-                                                                title="حذف"
-                                                                class="btn btn-danger">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
+{{--                                            @foreach($products as $product)--}}
+{{--                                                <tr>--}}
+{{--                                                    <td>{{$product->product_title}}</td>--}}
+{{--                                                    <td>{{$product->category_name}}</td>--}}
 
+{{--                                                    <td>--}}
+{{--                                                        <button title="بروز رسانی"--}}
+{{--                                                                onclick="window.location='{{ url('dashboard/product/update-product-view/'.$product->id) }}'"--}}
+{{--                                                                class="btn btn-success">--}}
+{{--                                                            <i class="fa fa-edit"></i>--}}
+{{--                                                        </button>--}}
+{{--                                                    </td>--}}
+{{--                                                    <td>--}}
+{{--                                                        <button onclick="" data-toggle="modal" data-target="#delete"--}}
+{{--                                                                title="حذف"--}}
+{{--                                                                class="btn btn-danger">--}}
+{{--                                                            <i class="fa fa-times"></i>--}}
+{{--                                                        </button>--}}
+{{--                                                    </td>--}}
+{{--                                                </tr>--}}
                                                 <div id="delete" class="modal fade" role="dialog">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h2 class="modal-title text-right">پنجره تاییدی</h2>
                                                                 <button type="button" class="close text-left "
                                                                         data-dismiss="modal">&times;
                                                                 </button>
-
                                                             </div>
                                                             <div class="modal-body">
                                                                 <h4 align="center" style="margin: 0"> مطمین هستید که می
@@ -125,7 +108,7 @@
                                                                         class="btn btn-warning">لغو
                                                                 </button>
                                                                 <button type="button"
-                                                                        onclick="deleteCategory({{$category->id}})"
+{{--                                                                        onclick="deleteCategory({{$product->id}})"--}}
                                                                         class="btn btn-danger">تایید
                                                                 </button>
 
@@ -133,16 +116,63 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            @endforeach
+{{--                                            @endforeach--}}
                                             </tbody>
                                         </table>
                                         <div class="mt-4 mr-4">
-                                            {{$categories->links()}}
+{{--                                            {{$products->links()}}--}}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </section>
+                <section id="basic-form-layouts">
+                    <div class="row match-height">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title" id="basic-layout-form">افزودن محصولات</h4>
+                                    <a class="heading-elements-toggle"><i
+                                            class="fa fa-ellipsis-v font-medium-3"></i></a>
+                                    <div class="heading-elements">
+                                        <ul class="list-inline mb-0">
+                                            <li><a data-action="collapse"><i class="ft-plus"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-content collapse">
+                                    <div class="card-body">
+                                        <div class="card-text">
+                                            <p> محصولات تان را اینجا اضافه نمایید</p>
+                                        </div>
+                                        <form method="POST" action="{{url('dashboard/products/add-product')}}"
+                                              enctype="multipart/form-data">
+                                            {{ csrf_field() }}
+                                            <div class="form-body">
+
+                                                <div class="form-group">
+                                                    <label for="geolocation">توضیحات محصول</label>
+                                                    <textarea id="geolocation" rows="5" class="form-control"
+                                                              name="description"
+                                                              placeholder="توضیحات محصول"></textarea>
+                                                </div>
+                                                <div class="form-actions">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        ذخیره
+                                                    </button>
+                                                    <button type="button" class="btn btn-warning mr-1">
+                                                        لغو
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </section>
             </div>
@@ -154,14 +184,14 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
             $.ajax({
-                url: "delete-category",
+                url: "delete-product",
                 type: "POST",
                 headers: headers,
                 data: {'id': id},
                 dataType: "text",
                 success: function (monitordata) {
                     if (monitordata === "success") {
-                        window.location.href = 'categories';
+                        window.location.href = 'products';
                     }
                 }
             });

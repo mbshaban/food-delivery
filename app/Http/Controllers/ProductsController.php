@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categories;
+use App\Models\Menu;
 use App\Models\Products;
 use App\Models\Sellers;
 use App\Notifications\NewUserNotification;
@@ -23,22 +24,21 @@ class ProductsController extends Controller
     {
         $this->middleware('auth');
     }
+
     public function listProducts()
     {
 
         //        if (Auth::user()->role === 'admin') {
-        $products = Products::select('product_title', 'price', 'discount', 'product_image', 'product_status', 'products.id', 'isApproved',
-            'description', 'category_id', 'serller_id', 'categories.category_name', 'sellers.business_name')
-            ->join('categories', 'categories.id', '=', 'products.category_id')
-            ->join('sellers', 'sellers.id', '=', 'products.serller_id')
+        $products = Products::select('product_title', 'price', 'product_image', 'product_status', 'products.id', 'isApproved',
+            'description', 'menu_id', 'seller_id', 'menu.title', 'sellers.business_name')
+            ->join('menu', 'menu.id', '=', 'products.menu_id')
+            ->join('sellers', 'sellers.id', '=', 'products.seller_id')
             ->join('users', 'users.id', '=', 'sellers.user_id')
-            ->where('users.id','=',Auth::user()->id)
+            ->where('users.id', '=', Auth::user()->id)
             ->latest('products.created_at')
             ->paginate(5);
-        $categories = Categories::select('type', 'category_webaddress', 'category_name', 'category_image', 'category_description', 'id')
-            ->latest('categories.created_at')
-            ->get();
-        return view('dashboard.product.product', compact('products', 'categories'));
+        $menus = Menu::select('title','id')->latest('menu.created_at')->get();
+        return view('dashboard.product.product', compact('products', 'menus'));
 //        } elseif (Auth::user()->role === 'blogger') {
 //            $blogs = Blog::select('blog.title', 'blog.created_at', 'language', 'author', 'blog.id', 'blog.user_id')
 //                ->where('blog.user_id', '=', Auth::user()->id)
@@ -58,11 +58,10 @@ class ProductsController extends Controller
         $v = Validator::make($request->all(),
             [
                 'product_title' => 'required|max:250',
-                'category_id' => 'required',
+                'menu_id' => 'required',
                 'description' => 'required',
                 'user_id' => 'required',
                 'price' => 'required|max:250',
-                'discount' => 'required|max:250',
                 'product_status' => 'required|max:250',
                 'isApproved' => 'required|max:250',
                 'product_image' => 'mimes:jpeg,png,bmp,jpg|max:20000'
@@ -70,16 +69,15 @@ class ProductsController extends Controller
         if ($v->fails()) {
             return redirect()->back()->withErrors($v->errors())->withInput();
         } else {
-            $sellerInfo = Sellers::where('user_id','=',$request->get('user_id'))->first();
+            $sellerInfo = Sellers::where('user_id', '=', $request->get('user_id'))->first();
             $image = $request->file('product_image');
             Storage::makeDirectory('productImage');
             $imagePath = date("Y-m-d-h-i-sa") . rand(1, 1000) . "." . $image->getClientOriginalExtension();
             $data['product_title'] = $request->get('product_title');
-            $data['category_id'] = $request->get('category_id');
+            $data['menu_id'] = $request->get('menu_id');
             $data['description'] = $request->get('description');
-            $data['serller_id'] = $sellerInfo->id;
+            $data['seller_id'] = $sellerInfo->id;
             $data['price'] = $request->get('price');
-            $data['discount'] = $request->get('discount');
             $data['product_status'] = $request->get('product_status');
             $data['isApproved'] = $request->get('isApproved');
             $data['product_image'] = $imagePath;
@@ -105,10 +103,10 @@ class ProductsController extends Controller
     public function updateProductView($id)
     {
         $data = Products::where('id', $id)->first();
-        $categories = Categories::select('type', 'category_webaddress', 'category_name', 'category_image', 'category_description', 'id')
-            ->latest('categories.created_at')
+        $menus = Menu::select('title', 'id')
+            ->latest('menu.created_at')
             ->get();
-        return view('dashboard.product.edit-product', compact('data', 'categories'));
+        return view('dashboard.product.edit-product', compact('data', 'menus'));
     }
 
     public function updateProduct(Request $request, $id)
@@ -120,7 +118,6 @@ class ProductsController extends Controller
                 'description' => 'required',
                 'seller_id' => 'required',
                 'price' => 'required|max:250',
-                'discount' => 'required|max:250',
                 'product_status' => 'required|max:250',
                 'isApproved' => 'required|max:250',
                 'product_image' => 'mimes:jpeg,png,bmp,jpg|max:20000'
@@ -128,32 +125,31 @@ class ProductsController extends Controller
         if ($v->fails()) {
             return redirect()->back()->withErrors($v->errors())->withInput();
         } else {
-            try{
-            DB::beginTransaction();
-            $data['product_title'] = $request->get('product_title');
-            $data['category_id'] = $request->get('category_id');
-            $data['description'] = $request->get('description');
-            $data['serller_id'] = $request->get('seller_id');
-            $data['price'] = $request->get('price');
-            $data['discount'] = $request->get('discount');
-            $data['product_status'] = $request->get('product_status');
-            $data['isApproved'] = $request->get('isApproved');
-            if ($request->hasFile('product_image')) {
-                $image = $request->file('product_image');
-                Storage::makeDirectory('productImage');
-                $imagePath = date("Y-m-d-h-i-sa") . rand(1, 1000) . "." . $image->getClientOriginalExtension();
-                $data['product_image'] = $imagePath;
-                $update = Products::where('id', $id)->update($data);
-                if ($update) {
-                    Storage::put('productImage/' . $imagePath, \File::get($image));
-                    Storage::delete('productImage/' . $request->get('prev_image_path'));
+            try {
+                DB::beginTransaction();
+                $data['product_title'] = $request->get('product_title');
+                $data['menu_id'] = $request->get('menu_id');
+                $data['description'] = $request->get('description');
+                $data['seller_id'] = $request->get('seller_id');
+                $data['price'] = $request->get('price');
+                $data['product_status'] = $request->get('product_status');
+                $data['isApproved'] = $request->get('isApproved');
+                if ($request->hasFile('product_image')) {
+                    $image = $request->file('product_image');
+                    Storage::makeDirectory('productImage');
+                    $imagePath = date("Y-m-d-h-i-sa") . rand(1, 1000) . "." . $image->getClientOriginalExtension();
+                    $data['product_image'] = $imagePath;
+                    $update = Products::where('id', $id)->update($data);
+                    if ($update) {
+                        Storage::put('productImage/' . $imagePath, \File::get($image));
+                        Storage::delete('productImage/' . $request->get('prev_image_path'));
+                    }
+                } else {
+                    Products::where('id', $id)->update($data);
                 }
-            } else {
-                Products::where('id', $id)->update($data);
-            }
-            DB::commit();
-            return redirect('dashboard/products');
-            }catch (Exception $exception){
+                DB::commit();
+                return redirect('dashboard/products');
+            } catch (Exception $exception) {
                 DB::rollBack();
                 return redirect('dashboard/products');
             }
