@@ -16,17 +16,19 @@ class MobileHomePageController extends Controller
         $sliders = null;
         $slider = Sliders::select()->get();
         for ($i = 0; $i < count($slider); $i++) {
-            $slider[$i]->slider_image = "http://192.168.137.64:8000/api/image-file/sliders/" . $slider[$i]->slider_image;
+            $slider[$i]->slider_image = "http://10.10.10.252:8000/api/image-file/sliders/" . $slider[$i]->slider_image;
         }
         $categories = Categories::select()->get();
         for ($i = 0; $i < count($categories); $i++) {
-            $categories[$i]->category_image = "http://192.168.137.64:8000/api/image-file/categories/" . $categories[$i]->category_image;
+            $categories[$i]->category_image = "http://10.10.10.252:8000/api/image-file/categories/" . $categories[$i]->category_image;
         }
-        $sellers = Sellers::select('id', 'business_name', 'seller_type', 'full_address', 'village',
+        $sellers = Sellers::select('id', 'business_name', 'seller_type', 'full_address', 'village', 'image',
             'status_id', 'isNew', 'isFavourite', 'delivery_time', 'review')->get();
 
         for ($i = 0; $i < count($sellers); $i++) {
             $sellers[$i]['discount'] = 10;
+            $sellers[$i]['image'] = 'http://10.10.10.252:8000/api/image-file/sellers/' . $sellers[$i]->image;
+
         }
         return response()->json([
             'slider' => $slider,

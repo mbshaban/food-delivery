@@ -43,3 +43,9 @@ Route::get('/image-file/categories/{file_name}', function ($filename) {
     $mime = \File::mimeType($path);
     return \Response::make($image, 200)->header('Content-Type', $mime);
 });
+Route::get('/image-file/sellers/{file_name}', function ($filename) {
+    $path = storage_path('app') . '/sellers/' . $filename;
+    $image = \File::get($path);
+    $mime = \File::mimeType($path);
+    return \Response::make($image, 200)->header('Content-Type', $mime);
+});

@@ -19,6 +19,7 @@ class CreateSellersTable extends Migration
             $table->string('seller_type');
             $table->string('owner_name');
             $table->string('logo');
+            $table->string('image');
             $table->string('full_address');
             $table->text('geolocation')->nullable();
             $table->string('village')->nullable();

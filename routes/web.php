@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\WorkingHoursController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellersController;
 use App\Http\Controllers\CustomersController;
@@ -138,6 +139,10 @@ Route::get('dashboard/discounts', function () {
 //Menu
 Route::get('/dashboard/menu', [MenuController::class, 'listMenu']);
 Route::post('/dashboard/menu/add-menu', [MenuController::class, 'addMenu']);
-Route::get('/dashboard/menu/update-menu-view/{id}',[MenuController::class,'showUpdateMenuView']);
-Route::post('/dashboard/menu/update-menu/{id}',[MenuController::class,'updateMenu']);
-Route::post('/dashboard/delete-menu',[MenuController::class,'deleteMenu']);
+Route::get('/dashboard/menu/update-menu-view/{id}', [MenuController::class, 'showUpdateMenuView']);
+Route::post('/dashboard/menu/update-menu/{id}', [MenuController::class, 'updateMenu']);
+Route::post('/dashboard/delete-menu', [MenuController::class, 'deleteMenu']);
+
+//Working Hours
+
+Route::get('dashboard/working-hours', [WorkingHoursController::class, 'listWorkingHours']);
