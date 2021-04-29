@@ -44,16 +44,22 @@ class MobileHomePageController extends Controller
 
     public function getRestaurantByCategory($category_id)
     {
-        $data = Sellers::select('*')->join('seller_category', 'sellers.id', '=', 'seller_category.seller_id')
-            ->where('seller_category.category_id', '=', $category_id)->get();
-        for ($i = 0; $i < count($data); $i++) {
-            $data[$i]['discount'] = 10;
-            $data[$i]['delivery_cost'] = 50;
-            $data[$i]['image'] = 'http://169.254.90.11:8000/api/image-file/sellers/' . $data[$i]->image;
-            $data[$i]['logo'] = 'http://169.254.90.11:8000/api/image-file/logo/' . $data[$i]->logo;
+       try{
+           $data = Sellers::select('*')->join('seller_category', 'sellers.id', '=', 'seller_category.seller_id')
+               ->where('seller_category.category_id', '=', $category_id)->get();
+           for ($i = 0; $i < count($data); $i++) {
+               $data[$i]['discount'] = 10;
+               $data[$i]['delivery_cost'] = 50;
+               $data[$i]['image'] = 'http://169.254.90.11:8000/api/image-file/sellers/' . $data[$i]->image;
+               $data[$i]['logo'] = 'http://169.254.90.11:8000/api/image-file/logo/' . $data[$i]->logo;
 
-        }
-        return response()->json($data);
+           }
+           return response()->json($data);
+       }catch (\Exception $exception){
+           return response()->json([
+               'error' => $exception->getMessage()
+           ], 500);
+       }
     }
 
     public function getRestaurantDetails($id)

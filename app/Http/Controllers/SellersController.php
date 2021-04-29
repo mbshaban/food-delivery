@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SellerStatus;
 use Illuminate\Http\Request;
 use App\Models\Sellers;
 use App\Models\User;
@@ -17,41 +18,51 @@ class SellersController extends Controller
     {
         $districts = Districts::where('provinces_id', 1)->get();
         $sellers = Sellers::all();
-        return view('dashboard.sellers.sellers', compact('districts', 'sellers'));
+        $sellerStatuses = SellerStatus::all();
+        return view('dashboard.sellers.sellers', compact('districts', 'sellers', 'sellerStatuses'));
     }
 
     public function insert(Request $request)
     {
 
-        $request->validate([
-            'email' => 'required|email',
-            'business_name' => 'required',
-            'seller_type' => 'required',
-            'owner_name' => 'required',
-            'logo' => 'required|mimes:jpeg,png,bmp,jpg|max:20000',
-            'image' => 'required|mimes:jpeg,png,bmp,jpg|max:20000',
-            'full_address' => 'required',
-            'district_id' => 'required',
-            'password' => 'required|confirmed|min:6',
+        try{
+            Log::info($request->all());
+            $request->validate([
+                'email' => 'required|email',
+                'business_name' => 'required',
+                'seller_type' => 'required',
+                'owner_name' => 'required',
+                'delivery_time' => '',
+                'delivery_cost' => '',
+                'status_id' => 'required',
+                'logo' => 'required|mimes:jpeg,png,bmp,jpg|max:20000',
+                'image' => 'required|mimes:jpeg,png,bmp,jpg|max:20000',
+                'full_address' => 'required',
+                'district_id' => 'required',
+                'password' => 'required|confirmed|min:6',
 
-        ]);
+            ]);
+            Log::info($request->all());
+            DB::beginTransaction();
+            $user = new User;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->account_type = 'seller';
+            $user->password = bcrypt($request->password);
+            $user->save();
+            $logoAddrsess = $this->storeLogo($request);
+            $imageAddress = $this->storeImage($request);
+            DB::commit();
+            return $this->insertSeller($request, $user->id, $logoAddrsess, $imageAddress);
 
-        $user = new User;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
-        $user->account_type = 'seller';
-        $user->password = bcrypt($request->password);
-        $user->save();
-        $logoAddrsess = $this->storeLogo($request);
-        $imageAddress = $this->storeImage($request);
-        return $this->insertSeller($request, $user->id, $logoAddrsess, $imageAddress);
-
+        }catch (\Exception $exception){
+            DB::rollBack();
+        }
 
     }
 
     public function insertSeller($request, $userid, $logo, $image)
     {
-
         $seller = new Sellers;
         $seller->user_id = $userid;
         $seller->business_name = $request->business_name;
@@ -59,13 +70,15 @@ class SellersController extends Controller
         $seller->owner_name = $request->owner_name;
         $seller->logo = $logo;
         $seller->image = $image;
-        $seller->status_id = 1;
+        $seller->status_id = $request->status_id;
         $seller->full_address = $request->full_address;
-        $seller->geolocation = $request->geolocation;
+        $seller->longitude = '12345';
+        $seller->latitude = '34234';
+        $seller->delivery_time = $request->delivery_time;
+        $seller->delivery_cost = $request->delivery_cost;
         $seller->village = $request->village;
-        $seller->status_id = 1;
         $seller->district_id = $request->district_id;
-
+        Log::info($seller);
         $seller->save();
 
         return redirect()->back()->with('message', 'seller successfully added!');
