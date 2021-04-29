@@ -146,3 +146,7 @@ Route::post('/dashboard/delete-menu', [MenuController::class, 'deleteMenu']);
 //Working Hours
 
 Route::get('dashboard/working-hours', [WorkingHoursController::class, 'listWorkingHours']);
+Route::post('dashboard/working-hour/add', [WorkingHoursController::class, 'addWorkingHours']);
+Route::get('dashboard/working-hour/update-view/{id}', [WorkingHoursController::class, 'showUpdateWorkingHourView']);
+Route::post('dashboard/working-hours/update/{id}', [WorkingHoursController::class, 'updateWorkingHours']);
+Route::post('dashboard/delete-working-hours', [WorkingHoursController::class, 'deleteWorkingHours']);

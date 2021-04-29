@@ -44,8 +44,14 @@ Route::get('/image-file/categories/{file_name}', function ($filename) {
     return \Response::make($image, 200)->header('Content-Type', $mime);
 });
 Route::get('/image-file/sellers/{file_name}', function ($filename) {
-    $path = storage_path('app') . '/sellers/' . $filename;
+    $path = storage_path('app') . '/sellerImage/' . $filename;
     $image = \File::get($path);
     $mime = \File::mimeType($path);
     return \Response::make($image, 200)->header('Content-Type', $mime);
 });
+
+Route::get('get-restaurant-by-category/{category_id}',[MobileHomePageController::class,'getRestaurantByCategory']);
+//Route::get('/get-restaurant-category')
+//Route::group(['middleware' => ['jwtVerify']], function () {
+//    Route::get('/get-home-data', [MobileHomePageController::class, 'getHomeData']);
+//});

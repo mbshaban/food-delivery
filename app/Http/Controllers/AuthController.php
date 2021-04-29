@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use JWTAuth;
-
 class AuthController extends Controller
 {
 
@@ -72,17 +71,9 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        Log::info($request->all());
-//        $validator = Validator::make($request->all(), [
-//            'phone' => 'required|string|between:10,10',
-//            'password' => 'required|string|min:6',
-//        ]);
-//
-//        if ($validator->fails()) {
-//            return response()->json($validator->errors(), 422);
-//        }
+//        Log::info($request->all());
         $user = User::where('phone', $request['phone'])->first();
-        if (!$token = auth()->attempt($request->all())) {
+        if (!$token = JWTAuth::attempt($request->all())) {
             return response()->json([
                 'error' => 'unauthorized'
             ], 401);
@@ -136,7 +127,7 @@ class AuthController extends Controller
             'user_id' => $userId,
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 180
+            'expires_in' => auth('api')->factory()->getTTL() * 180
         ]);
     }
 

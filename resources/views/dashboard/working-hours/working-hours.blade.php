@@ -8,7 +8,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form">افزودن مینوی غذایی</h4>
+                                    <h4 class="card-title" id="basic-layout-form">افزودن ساعت کاری</h4>
                                     <a class="heading-elements-toggle"><i
                                             class="fa fa-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -20,30 +20,42 @@
                                 <div class="card-content collapse">
                                     <div class="card-body">
                                         <div class="card-text">
-                                            <p>مینوی غذایی خودرا اینجا وارد کنید</p>
+                                            <p>ساعات کاری خودرا اینجا وارد کنید</p>
                                         </div>
-                                        <form method="POST" action="{{url('dashboard/menu/add-menu')}}"
+                                        <form method="POST" action="{{url('dashboard/working-hour/add')}}"
                                               enctype="multipart/form-data">
                                             {{ csrf_field() }}
                                             <div class="form-body">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="owner_name">مینو</label>
-                                                        <input type="text" class="form-control"
-                                                               name="title" placeholder="مینو">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="owner_name"> عنوان</label>
+                                                            <select class="form-control"
+                                                                    name="title" id="lang">
+                                                                <option  value="صبحانه">صبحانه</option>
+                                                                <option  value="چاشت">چاشت</option>
+                                                                <option  value="شب">شب</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="form-body">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="owner_name">مینو</label>
-                                                        <input type="text" class="form-control "
-                                                               name="title" placeholder="مینو">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="owner_name">وقت شروع</label>
+                                                            <input type="text" class="form-control" id="startTime"
+                                                                   name="start_time">
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="owner_name">وقت ختم</label>
+                                                            <input type="text" class="form-control" id="endTime"
+                                                                   name="end_time">
+                                                            <input type="hidden" name="user_id"
+                                                                   value="{{auth()->user()->id}}">
+                                                        </div>
+                                                    </div>
 
+                                                </div>
                                             </div>
                                             <div class="form-actions">
                                                 <button type="submit" class="btn btn-primary">
@@ -75,7 +87,9 @@
                                                class="table table-bordered  ">
                                             <thead>
                                             <tr>
-                                                <th>مینو</th>
+                                                <th>عنوان</th>
+                                                <th>شروع وقت</th>
+                                                <th>ختم وقت</th>
                                                 <th>بروز رسان</th>
                                                 <th>حذف</th>
                                             </tr>
@@ -88,7 +102,7 @@
                                                     <td>{{$workingHour->end_time}}</td>
                                                     <td>
                                                         <button title="بروز رسانی"
-                                                                onclick="window.location='{{ url('dashboard/menu/update-menu-view/'.$workingHour->id) }}'"
+                                                                onclick="window.location='{{ url('dashboard/working-hour/update-view/'.$workingHour->id) }}'"
                                                                 class="btn btn-success">
                                                             <i class="fa fa-edit"></i>
                                                         </button>
@@ -142,22 +156,26 @@
         </div>
     </div>
     <script type="text/javascript">
-        $(function () {
-            $('.datetimepicker').datetimepicker();
+        $('#startTime').datetimepicker({
+            format: 'hh:mm:ss',
         });
+        $('#endTime').datetimepicker({
+            format: 'hh:mm:ss',
+        });
+
         function deleteCategory(id) {
             var headers = {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
             $.ajax({
-                url: "delete-menu",
+                url: "delete-working-hours",
                 type: "POST",
                 headers: headers,
                 data: {'id': id},
                 dataType: "text",
                 success: function (monitordata) {
                     if (monitordata === "success") {
-                        window.location.href = 'menu';
+                        window.location.href = 'working-hours';
                     }
                 }
             });

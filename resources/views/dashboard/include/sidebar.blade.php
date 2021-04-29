@@ -19,6 +19,8 @@
                     </li>
                     <li><a class="menu-item" href="{{url('dashboard/discounts')}}" data-i18n="nav.dash.crm">تخفیفات</a>
                     </li>
+                    <li><a class="menu-item" href="{{url('dashboard/working-hours')}}" data-i18n="nav.dash.crm">اوقات کاری</a>
+                    </li>
                 </ul>
             </li>
             <li class=" nav-item"><a href="#"><i class="icon-user-female"></i><span class="menu-title"

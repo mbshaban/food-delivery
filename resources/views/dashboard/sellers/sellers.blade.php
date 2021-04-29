@@ -99,7 +99,7 @@
 														</div>
 													</div>
 													<div class="col-md-6">
-														
+
 														<div class="form-group">
 															<label>لوگو</label>
 																<input type="file" name="logo" id="file" class="form-control @error('logo') is-invalid @enderror" value="{{ old('logo') }}">
@@ -108,7 +108,20 @@
 								                                    <strong>{{ $message }}</strong>
 								                                </span>
 								                                @enderror
-																<span class="file-custom"></span>	
+																<span class="file-custom"></span>
+														</div>
+													</div>
+                                                    <div class="col-md-6">
+
+														<div class="form-group">
+															<label>تصویر</label>
+																<input type="file" name="image" id="file" class="form-control @error('image') is-invalid @enderror" value="{{ old('image') }}">
+																@error('image')
+								                                <span class="invalid-feedback" role="alert">
+								                                    <strong>{{ $message }}</strong>
+								                                </span>
+								                                @enderror
+																<span class="file-custom"></span>
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -133,7 +146,7 @@
 							                                @enderror
 														</div>
 													</div>
-													
+
 												</div>
 
 
@@ -181,7 +194,7 @@
 													</div>
 
 												</div>
-												
+
 												<div class="form-group">
 													<label for="geolocation">موقعیت جغرافیایی</label>
 													<textarea id="geolocation" rows="5" class="form-control @error('geolocation') is-invalid @enderror" name="geolocation" placeholder="موقعیت جغرافیایی">{{ old('geolocation') }}</textarea>
@@ -238,8 +251,8 @@
 									        <thead>
 									            <tr>
 									                <th>نام تجارت</th>
-									                <th>مالک</th>				                
-									                <th>نوع تجارت</th>				                
+									                <th>مالک</th>
+									                <th>نوع تجارت</th>
 									                <th>لوگو</th>
 									                <th>عمل</th>
 									            </tr>
@@ -248,9 +261,9 @@
 									        @forelse ($sellers as $seller)
 									            <tr>
 									                <td><h6 class="mb-0">{{$seller->business_name}}</td>
-									                <td><span class="badge badge-default badge-warning">{{$seller->owner_name}}</span></td>				                
+									                <td><span class="badge badge-default badge-warning">{{$seller->owner_name}}</span></td>
 									                <td>{{$seller->seller_type}}</td>
-									                
+
 									                <td class="text-center">
 									                	<span class="avatar avatar-online">
 									                		<img src="{{url('dashboard/sellers/logo/'.$seller->logo)}}" alt="avatar" data-placement="right" title="{{$seller->logo}}" style="width: 100%">

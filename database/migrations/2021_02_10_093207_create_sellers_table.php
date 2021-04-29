@@ -23,6 +23,10 @@ class CreateSellersTable extends Migration
             $table->string('full_address');
             $table->text('geolocation')->nullable();
             $table->string('village')->nullable();
+            $table->boolean('is_new')->nullable();
+            $table->boolean('is_favourite')->nullable();
+            $table->string('deliver_time')->nullable();
+            $table->integer('review')->nullable();
             $table->timestamps();
         });
         Schema::table('sellers', function(Blueprint $table){
