@@ -25,7 +25,8 @@ class CreateSellersTable extends Migration
             $table->string('village')->nullable();
             $table->boolean('is_new')->nullable();
             $table->boolean('is_favourite')->nullable();
-            $table->string('deliver_time')->nullable();
+            $table->string('delivery_time')->nullable();
+            $table->string('delivery_cost')->nullable();
             $table->integer('review')->nullable();
             $table->timestamps();
         });

@@ -49,9 +49,21 @@ Route::get('/image-file/sellers/{file_name}', function ($filename) {
     $mime = \File::mimeType($path);
     return \Response::make($image, 200)->header('Content-Type', $mime);
 });
+Route::get('/image-file/logo/{file_name}', function ($filename) {
+    $path = storage_path('app') . '/logos/' . $filename;
+    $image = \File::get($path);
+    $mime = \File::mimeType($path);
+    return \Response::make($image, 200)->header('Content-Type', $mime);
+});
+Route::get('/image-file/product_image/{file_name}', function ($filename) {
+    $path = storage_path('app') . '/productImage/' . $filename;
+    $image = \File::get($path);
+    $mime = \File::mimeType($path);
+    return \Response::make($image, 200)->header('Content-Type', $mime);
+});
 
 Route::get('get-restaurant-by-category/{category_id}',[MobileHomePageController::class,'getRestaurantByCategory']);
-//Route::get('/get-restaurant-category')
+Route::get('get-restaurant-details/{restaurant_id}',[MobileHomePageController::class,'getRestaurantDetails']);
 //Route::group(['middleware' => ['jwtVerify']], function () {
 //    Route::get('/get-home-data', [MobileHomePageController::class, 'getHomeData']);
 //});
