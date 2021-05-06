@@ -15,8 +15,9 @@ class CreateCustomerLocation extends Migration
     {
         Schema::create('customer_location', function (Blueprint $table) {
             $table->id();
-            $table->string('longitude');
-            $table->string('latitude');
+            $table->double('longitude');
+            $table->double('latitude');
+            $table->string('map_address');
             $table->string('title');
             $table->string('address');
             $table->string('phone');

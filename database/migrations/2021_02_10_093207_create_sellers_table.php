@@ -21,8 +21,8 @@ class CreateSellersTable extends Migration
             $table->string('logo');
             $table->string('image');
             $table->string('full_address');
-            $table->string('longitude');
-            $table->string('latitude');
+            $table->double('longitude');
+            $table->double('latitude');
             $table->string('village')->nullable();
             $table->boolean('is_new')->nullable();
             $table->boolean('is_favourite')->nullable();

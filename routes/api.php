@@ -64,6 +64,8 @@ Route::get('/image-file/product_image/{file_name}', function ($filename) {
 
 Route::get('get-restaurant-by-category/{category_id}',[MobileHomePageController::class,'getRestaurantByCategory']);
 Route::get('get-restaurant-details/{restaurant_id}',[MobileHomePageController::class,'getRestaurantDetails']);
+Route::post('add-customer-address',[MobileHomePageController::class,'addCustomerAddress']);
+Route::get('get-customer-address/{customer_id}',[MobileHomePageController::class,'getCustomerAddress']);
 //Route::group(['middleware' => ['jwtVerify']], function () {
 //    Route::get('/get-home-data', [MobileHomePageController::class, 'getHomeData']);
 //});
