@@ -83,7 +83,7 @@ class MobileHomePageController extends Controller
             ])->get();
             for ($j = 0; $j < count($menuDetails[$i]['products']); $j++) {
                 $menuDetails[$i]['products'][$j]->product_image =
-                    'http://10.10.10.248:8000/api/image-file/product_image/' . $menuDetails[$i]['products'][$j]->product_image;
+                    'http://10.10.10.248:8000/api/image-file/product-image/' . $menuDetails[$i]['products'][$j]->product_image;
             }
         }
         return response()->json($menuDetails);
@@ -92,7 +92,6 @@ class MobileHomePageController extends Controller
     public function addCustomerAddress(Request $request)
     {
         try {
-            Log::info($request->all());
             DB::beginTransaction();
             $customer = Customers::where('user_id', $request->get('user_id'))->first();
             $data['longitude'] = $request->get('longitude');
@@ -165,6 +164,20 @@ class MobileHomePageController extends Controller
                 'error' => $exception->getMessage()
             ], 500);
         }
+    }
 
+    public function getCustomer($id)
+    {
+        try {
+            $data = Customers::select('*')->where('user_id', $id)->get();
+            for ($i = 0; $i < count($data); $i++) {
+                $data[$i]->profile_picture = "http://10.10.10.248:8000/api/image-file/customer-image/" . $data[$i]->profile_picture;
+            }
+            return response()->json($data, 200);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'error' => $exception->getMessage()
+            ], 500);
+        }
     }
 }

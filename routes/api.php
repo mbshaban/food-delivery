@@ -55,8 +55,14 @@ Route::get('/image-file/logo/{file_name}', function ($filename) {
     $mime = \File::mimeType($path);
     return \Response::make($image, 200)->header('Content-Type', $mime);
 });
-Route::get('/image-file/product_image/{file_name}', function ($filename) {
+Route::get('/image-file/product-image/{file_name}', function ($filename) {
     $path = storage_path('app') . '/productImage/' . $filename;
+    $image = \File::get($path);
+    $mime = \File::mimeType($path);
+    return \Response::make($image, 200)->header('Content-Type', $mime);
+});
+Route::get('/image-file/customer-image/{file_name}', function ($filename) {
+    $path = storage_path('app') . '/customerImage/' . $filename;
     $image = \File::get($path);
     $mime = \File::mimeType($path);
     return \Response::make($image, 200)->header('Content-Type', $mime);
@@ -67,6 +73,7 @@ Route::get('get-restaurant-details/{restaurant_id}',[MobileHomePageController::c
 Route::post('add-customer-address',[MobileHomePageController::class,'addCustomerAddress']);
 Route::get('get-customer-address/{customer_id}',[MobileHomePageController::class,'getCustomerAddress']);
 Route::post('update-customer/{customer_id}',[MobileHomePageController::class,'updateCustomer']);
+Route::get('get-customer/{customer_id}',[MobileHomePageController::class,'getCustomer']);
 //Route::group(['middleware' => ['jwtVerify']], function () {
 //    Route::get('/get-home-data', [MobileHomePageController::class, 'getHomeData']);
 //});
