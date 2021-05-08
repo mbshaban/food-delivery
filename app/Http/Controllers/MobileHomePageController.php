@@ -12,6 +12,7 @@ use App\Models\Sliders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use JWTAuth;
 
 class MobileHomePageController extends Controller
@@ -133,4 +134,37 @@ class MobileHomePageController extends Controller
 
     }
 
+    public function updateCustomer(Request $request, $id)
+    {
+        $imagePath = '';
+        try {
+            $prevFile = Customers::where('user_id', $id)->first();
+            $prevImage = $prevFile->profile_picture;
+            $data['name'] = $request->get('name');
+            $data['email'] = $request->get('email');
+            $data['gender'] = $request->get('gender');
+            $data['date_of_birth'] = $request->get('dob');
+            $image = $request->file('file');
+            if ($request->hasFile('file')) {
+                Storage::makeDirectory('customerImage');
+                $imagePath = date("Y-m-d-h-i-sa") . rand(1, 1000) . "." . $image->getClientOriginalExtension();
+                if ($prevImage) {
+                    Storage::delete('customerImage/' . $prevImage);
+                }
+                Storage::put('customerImage/' . $imagePath, \File::get($image));
+            }
+
+            $data['profile_picture'] = $imagePath;
+            $update = Customers::where('user_id', $id)->update($data);
+            if ($update) {
+                return response()->json($id, 200);
+            }
+
+        } catch (\Exception $exception) {
+            return response()->json([
+                'error' => $exception->getMessage()
+            ], 500);
+        }
+
+    }
 }
