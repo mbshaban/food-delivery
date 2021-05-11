@@ -30,7 +30,7 @@ Route::post('/add-user-details', [AuthController::class, 'addUserDetails']);
 
 
 //Home
-Route::get('/get-home-data', [MobileHomePageController::class, 'getHomeData']);
+Route::get('/get-home-data/{customer_id}', [MobileHomePageController::class, 'getHomeData']);
 Route::get('/image-file/sliders/{file_name}', function ($filename) {
     $path = storage_path('app') . '/sliders/' . $filename;
     $image = \File::get($path);
