@@ -25,11 +25,11 @@ class MobileHomePageController extends Controller
     {
         $slider = Sliders::select()->get();
         for ($i = 0; $i < count($slider); $i++) {
-            $slider[$i]->slider_image = "http://10.10.10.242:8000/api/image-file/sliders/" . $slider[$i]->slider_image;
+            $slider[$i]->slider_image = "http://10.10.10.250:8000/api/image-file/sliders/" . $slider[$i]->slider_image;
         }
         $categories = Categories::select()->get();
         for ($i = 0; $i < count($categories); $i++) {
-            $categories[$i]->category_image = "http://10.10.10.242:8000/api/image-file/categories/" . $categories[$i]->category_image;
+            $categories[$i]->category_image = "http://10.10.10.250:8000/api/image-file/categories/" . $categories[$i]->category_image;
         }
         $sellers = Sellers::select('*')->get();
 
@@ -38,15 +38,15 @@ class MobileHomePageController extends Controller
             $sellers[$i]['delivery_cost'] = 50;
             $sellers[$i]['latitude'] = 123445;
             $sellers[$i]['longitude'] = 2154878;
-            $sellers[$i]['logo'] = 'http://10.10.10.242:8000/api/image-file/logo/' . $sellers[$i]->logo;
-            $sellers[$i]['image'] = 'http://10.10.10.242:8000/api/image-file/sellers/' . $sellers[$i]->image;
+            $sellers[$i]['logo'] = 'http://10.10.10.250:8000/api/image-file/logo/' . $sellers[$i]->logo;
+            $sellers[$i]['image'] = 'http://10.10.10.250:8000/api/image-file/sellers/' . $sellers[$i]->image;
 
         }
         $customer = Customers::select('name','customers.email','gender','date_of_birth','profile_picture','phone')
             ->join('users','customers.user_id','=','users.id')
             ->where('user_id', $id)->get();
         for ($i = 0; $i < count($customer); $i++) {
-            $customer[$i]->profile_picture = "http://10.10.10.242:8000/api/image-file/customer-image/" . $customer[$i]->profile_picture;
+            $customer[$i]->profile_picture = "http://10.10.10.250:8000/api/image-file/customer-image/" . $customer[$i]->profile_picture;
         }
         return response()->json([
             'slider' => $slider,
@@ -66,8 +66,8 @@ class MobileHomePageController extends Controller
                 $data[$i]['delivery_cost'] = 50;
                 $data[$i]['latitude'] = 123445;
                 $data[$i]['longitude'] = 2154878;
-                $data[$i]['image'] = 'http://10.10.10.242:8000/api/image-file/sellers/' . $data[$i]->image;
-                $data[$i]['logo'] = 'http://10.10.10.242:8000/api/image-file/logo/' . $data[$i]->logo;
+                $data[$i]['image'] = 'http://10.10.10.250:8000/api/image-file/sellers/' . $data[$i]->image;
+                $data[$i]['logo'] = 'http://10.10.10.250:8000/api/image-file/logo/' . $data[$i]->logo;
 
             }
             return response()->json($data);
@@ -90,7 +90,7 @@ class MobileHomePageController extends Controller
             ])->get();
             for ($j = 0; $j < count($menuDetails[$i]['products']); $j++) {
                 $menuDetails[$i]['products'][$j]->product_image =
-                    'http://10.10.10.242:8000/api/image-file/product-image/' . $menuDetails[$i]['products'][$j]->product_image;
+                    'http://10.10.10.250:8000/api/image-file/product-image/' . $menuDetails[$i]['products'][$j]->product_image;
             }
         }
         return response()->json($menuDetails);
@@ -177,7 +177,7 @@ class MobileHomePageController extends Controller
         try {
             $data = Customers::select('*')->where('user_id', $id)->get();
             for ($i = 0; $i < count($data); $i++) {
-                $data[$i]->profile_picture = "http://10.10.10.242:8000/api/image-file/customer-image/" . $data[$i]->profile_picture;
+                $data[$i]->profile_picture = "http://10.10.10.250:8000/api/image-file/customer-image/" . $data[$i]->profile_picture;
             }
             return response()->json($data, 200);
         } catch (\Exception $exception) {
