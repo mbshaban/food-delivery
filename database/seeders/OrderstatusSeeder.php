@@ -13,7 +13,7 @@ class OrderstatusSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('orderstatus')->insert([
+        DB::table('order_status')->insert([
             [
                 'order_status' => 'pending'
             ],
@@ -26,7 +26,7 @@ class OrderstatusSeeder extends Seeder
             [
                 'order_status' => 'on the way'
             ],
- 
+
         ]);
     }
 }

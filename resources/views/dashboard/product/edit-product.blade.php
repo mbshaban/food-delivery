@@ -47,14 +47,6 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="owner_name">تخفیف</label>
-                                                    <input type="text" id="owner_name" class="form-control"
-                                                           name="discount" placeholder="تخفیف"
-                                                           value="{{$data->discount}}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
                                                     <label for="owner_name"> حالت محصول</label>
                                                     <select class="form-control"
                                                             name="product_status" id="lang">

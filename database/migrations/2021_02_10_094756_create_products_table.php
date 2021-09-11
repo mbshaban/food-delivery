@@ -17,7 +17,6 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('product_title');
             $table->integer('price');
-            $table->integer('discount');
             $table->string('product_image');
             $table->string('product_status');
             $table->boolean('isApproved')->nullable();
@@ -25,8 +24,8 @@ class CreateProductsTable extends Migration
             $table->timestamps();
         });
         Schema::table('products', function(Blueprint $table){
-            $table->foreignId('category_id')->constrained('categories')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('serller_id')->constrained('sellers')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('menu_id')->constrained('menu')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('seller_id')->constrained('sellers')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

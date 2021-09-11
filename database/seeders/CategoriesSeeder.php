@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+
 class CategoriesSeeder extends Seeder
 {
     /**
@@ -15,32 +16,23 @@ class CategoriesSeeder extends Seeder
     {
         DB::table('categories')->insert([
             [
-                'type' => 'Resturant',
-                'category_webaddress' => 'piza',
-                'category_name' => 'پیتزا',
-                'category_image' => 'piza.jpg',
-                'category_description' => 'پیتزا یکی از بهترین غذاهای جهان است'
+                'title' => 'پیتزا',
+                'category_image' => 'ddd'
             ],
             [
-                'type' => 'Resturant',
-                'category_webaddress' => 'Ashak',
-                'category_name' => 'آشک',
-                'category_image' => 'ashak.jpg',
-                'category_description' => 'آشک یکی از بهترین غذاهای جهان است'
+                'title' => 'آشک',
+                'category_image' => 'ddd'
+
             ],
             [
-                'type' => 'Resturant',
-                'category_webaddress' => 'bolani',
-                'category_name' => 'بولانی',
-                'category_image' => 'bolani.jpg',
-                'category_description' => 'بولانی یکی از بهترین غذاهای جهان است'
+                'title' => 'بولانی',
+                'category_image' => 'ddd'
+
             ],
             [
-                'type' => 'Resturant',
-                'category_webaddress' => 'qabili',
-                'category_name' => 'قابلی',
-                'category_image' => 'qabili.jpg',
-                'category_description' => 'قابلی یکی از بهترین غذاهای جهان است'
+                'title' => 'قابلی',
+                'category_image' => 'ddd'
+
             ]
         ]);
     }

@@ -15,16 +15,14 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->text('location');
-            $table->text('geolocation');
-            $table->string('village');
             $table->timestamps();
         });
         Schema::table('orders', function(Blueprint $table){
             $table->foreignId('customer_id')->constrained('customers')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('location_id')->constrained('customer_location')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('seller_id')->constrained('sellers')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('deliver_id')->constrained('delivers')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('order_status')->constrained('orderstatus')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('order_status')->constrained('order_status')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

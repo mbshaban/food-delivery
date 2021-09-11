@@ -9,7 +9,6 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title" id="basic-layout-form">افزودن کتگوری محصولات</h4>
-                                    {{\Illuminate\Support\Facades\Log::info(Auth::user())}}
                                     <a class="heading-elements-toggle"><i
                                             class="fa fa-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -25,29 +24,14 @@
                                         </div>
                                         <form method="POST" action="{{url('dashboard/category/add-category')}}"
                                               enctype="multipart/form-data">
-                                            {{ csrf_token() }}
+                                            {{ csrf_field() }}
                                             <div class="form-body">
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="owner_name">نوع</label>
-                                                            <input type="text" id="user_id" class="form-control"
-                                                                   name="type" placeholder="نوع">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="owner_name">آدرس وب کتگوری</label>
-                                                            <input type="text" id="owner_name" class="form-control"
-                                                                   name="category_webaddress"
-                                                                   placeholder="کتگوری وب آدرس">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
                                                             <label for="owner_name">کتگوری</label>
-                                                            <input type="text" id="owner_name" class="form-control"
-                                                                   name="category_name" placeholder="کتگوری">
+                                                            <input type="text"  class="form-control"
+                                                                   name="title" placeholder="کتگوری">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -58,12 +42,6 @@
                                                                    name="category_image">
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="geolocation">توضیحات کتگوری</label>
-                                                    <textarea id="geolocation" rows="5" class="form-control"
-                                                              name="category_description"
-                                                              placeholder="توضیحات کتگوری"></textarea>
                                                 </div>
                                                 <div class="form-actions">
                                                     <button type="submit" class="btn btn-primary">
@@ -93,13 +71,10 @@
                                     <!-- Task List table -->
                                     <div class="table-responsive">
                                         <table id="project-task-list"
-                                               class="table table-bordered w-auto ">
+                                               class="table table-bordered  ">
                                             <thead>
                                             <tr>
-                                                <th> نوعیت کتگوری</th>
-                                                <th>آدرس وب کتگوری</th>
                                                 <th>نام کتگوری</th>
-                                                <th>توضیحات کتگوری</th>
                                                 <th>تصویر کتگوری</th>
                                                 <th>بروز رسان</th>
                                                 <th>حذف</th>
@@ -108,12 +83,7 @@
                                             <tbody>
                                             @foreach($categories as $category)
                                                 <tr>
-                                                    <td>{{$category->type}}</td>
-                                                    <td>{{$category->category_webaddress}}</td>
-                                                    <td>{{$category->category_name}}</td>
-                                                    <td class="table-text-wrap">
-                                                        {{$category->category_description}}
-                                                    </td>
+                                                    <td>{{$category->title}}</td>
                                                     <td class="text-center">
                                                         <img
                                                             src="{{url('dashboard/category/category-image/categoryImage/'.$category->category_image)}}"
@@ -180,9 +150,13 @@
     </div>
     <script type="text/javascript">
         function deleteCategory(id) {
+            var headers = {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
             $.ajax({
                 url: "delete-category",
-                type: "GET",
+                type: "POST",
+                headers: headers,
                 data: {'id': id},
                 dataType: "text",
                 success: function (monitordata) {

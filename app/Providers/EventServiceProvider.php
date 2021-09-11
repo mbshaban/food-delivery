@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Listeners\SendNewUserNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -30,4 +29,8 @@ class EventServiceProvider extends ServiceProvider
     {
         //
     }
+
+//'App\Events\OrderStatusChanged' => [
+//'App\Listeners\OrderStatusChangedListener',
+//],
 }

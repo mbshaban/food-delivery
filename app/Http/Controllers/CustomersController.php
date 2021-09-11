@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
 class CustomersController extends Controller
 {
     /**
@@ -21,47 +23,56 @@ class CustomersController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
-		$districts = Districts::where('provinces_id', 1)->get();
+    public function index()
+    {
+        $districts = Districts::where('provinces_id', 1)->get();
         $customers = Customers::join('districts', 'customers.district_id', 'districts.id')
-        ->join('users', 'customers.user_id', 'users.id')
-        ->select('customers.*', 'districts.district_name', 'users.phone')->get();
-		return view('dashboard.customers.customers', compact('districts', 'customers'));
-	}
+            ->join('users', 'customers.user_id', 'users.id')
+            ->select('customers.*', 'districts.district_name', 'users.phone')->get();
+        return view('dashboard.customers.customers', compact('districts', 'customers'));
+    }
+
     //this is for customer
-    public function settings(){
+    public function settings()
+    {
         $districts = Districts::where('provinces_id', 1)->get();
         $customer = Customers::where('user_id', Auth::user()->id)->first();
         return view('dashboard.customers.settings', compact('districts', 'customer'));
     }
+
     //this is for admin
-    public function edit($id){
+    public function edit($id)
+    {
         $districts = Districts::where('provinces_id', 1)->get();
         $customer = Customers::where('customers.user_id', $id)
-        ->join('districts', 'customers.district_id', 'districts.id')
-        ->join('users', 'customers.user_id', 'users.id')
-        ->select('customers.*', 'districts.district_name', 'users.email', 'users.phone')->first();
+            ->join('districts', 'customers.district_id', 'districts.id')
+            ->join('users', 'customers.user_id', 'users.id')
+            ->select('customers.*', 'districts.district_name', 'users.email', 'users.phone')->first();
         return view('dashboard.customers.settings', compact('districts', 'customer'));
     }
+
     //both admin and customer use this function
-    public function updateAccount(Request $request){
+    public function updateAccount(Request $request)
+    {
 
-    	$request->validate([
-		    'email' => 'required|email',
-		    'phone' => 'required',
+        $request->validate([
+            'email' => 'required|email',
+            'phone' => 'required',
 
-		]);
+        ]);
 
-    	$user['email'] = $request->get('email');
-    	$user['phone'] = $request->get('phone');
-    	
-    	User::where('id', $request->get('user_id'))->update($user);
+        $user['email'] = $request->get('email');
+        $user['phone'] = $request->get('phone');
 
-    	return redirect()->back()->with('message', 'Account Successfully Updated');
+        User::where('id', $request->get('user_id'))->update($user);
+
+        return redirect()->back()->with('message', 'Account Successfully Updated');
 
     }
+
     //both admin and customer use this function
-    public function updateInfo(Request $request){
+    public function updateInfo(Request $request)
+    {
 
         $request->validate([
             'customer_name' => 'required',
@@ -71,7 +82,7 @@ class CustomersController extends Controller
 
         $customer = Customers::where('user_id', Auth::user()->id)->first();
 
-        if($customer){
+        if ($customer) {
             //update customer
 
             $data['customer_name'] = $request->get('customer_name');
@@ -80,11 +91,10 @@ class CustomersController extends Controller
             $data['geolocation'] = $request->get('geolocation');
             $data['village'] = $request->get('village');
             $data['district_id'] = $request->get('district_id');
-            
+
             Customers::where('user_id', $request->get('user_id'))->update($data);
             return redirect()->back()->with('message', 'Your Info Successfully Updated');
-        }
-        else{
+        } else {
             //insert customer
 
             $user = new Customers;
@@ -94,16 +104,18 @@ class CustomersController extends Controller
             $user->geolocation = $request->geolocation;
             $user->village = $request->village;
             $user->user_id = Auth::user()->id;
-            $user->district_id   = $request->district_id ;
+            $user->district_id = $request->district_id;
             $user->save();
-            
+
             return redirect()->back()->with('message', 'Your Info Successfully Updated');
         }
-        
-        
+
+
     }
+
     //both admin and customer use this function
-    public function updatePassword(Request $request){
+    public function updatePassword(Request $request)
+    {
 
         $request->validate([
             'current_password' => 'required|min:6',
@@ -112,30 +124,31 @@ class CustomersController extends Controller
         ]);
 
         if (Hash::check($request->get('current_password'), \Auth::user()->password)) {
-            
-                $data['password'] = bcrypt($request->get('password'));
-                $v = User::where('id', $request->get('user_id'))->update($data);
-                if ($v) {
-                    return redirect()->back()->with('message', 'Your Password Successfully Updated');
-                }
-            
+
+            $data['password'] = bcrypt($request->get('password'));
+            $v = User::where('id', $request->get('user_id'))->update($data);
+            if ($v) {
+                return redirect()->back()->with('message', 'Your Password Successfully Updated');
+            }
+
         } else {
             $pfaild = "رمز عبور فعلی شما درست نیست!";
             return redirect()->back()->with('pfaild', $pfaild);
         }
-        
+
     }
 
-    public function storeImage($request){
+    public function storeImage($request)
+    {
 
-        $image=$request->file('logo');
+        $image = $request->file('logo');
         Storage::makeDirectory('logos');
-        $imgpath=date("Y-m-d-h-i-sa").rand(1,1000).".".$image->getClientOriginalExtension();
+        $imgpath = date("Y-m-d-h-i-sa") . rand(1, 1000) . "." . $image->getClientOriginalExtension();
 
-        Storage::put('logos/'.$imgpath, \File::get($image));
+        Storage::put('logos/' . $imgpath, \File::get($image));
 
         return $imgpath;
-                
+
     }
 
     public function delete(Request $request)
@@ -147,4 +160,6 @@ class CustomersController extends Controller
         return "success";
 
     }
+
+
 }

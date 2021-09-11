@@ -131,12 +131,15 @@
                                         ورود به سیستم
                                     </button>
 
-                                    @if (Route::has('password.request'))
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            {{ __('آیا رمز عبور خود را فراموش کرده اید؟') }}
-                                        </a>
-                                    @endif
+
                                 </div>
+                               <div class="col-md-8 offset-md-2 ">
+                                   @if (Route::has('password.request'))
+                                       <a class="btn btn-link" href="{{ route('password.request') }}">
+                                           {{ __('آیا رمز عبور خود را فراموش کرده اید؟') }}
+                                       </a>
+                                   @endif
+                               </div>
                             </div>
                         </form>
                     </div>

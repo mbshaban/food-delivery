@@ -14,6 +14,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        $this->call([CategoriesSeeder::Class, ProvincesSeeder::Class, DistrictsSeeder::Class, OrderstatusSeeder::Class]);
+        $this->call([CategoriesSeeder::Class, ProvincesSeeder::Class, DistrictsSeeder::Class, OrderstatusSeeder::Class,SellerStatusSeeder::class]);
     }
 }
